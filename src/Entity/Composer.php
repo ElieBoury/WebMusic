@@ -41,5 +41,34 @@ class Composer
      */
     private $codeOeuvre;
 
+    public function getCodeComposer(): ?int
+    {
+        return $this->codeComposer;
+    }
+
+    public function getCodeMusicien(): ?Musicien
+    {
+        return $this->codeMusicien;
+    }
+
+    public function setCodeMusicien(?Musicien $codeMusicien): self
+    {
+        $this->codeMusicien = $codeMusicien;
+
+        return $this;
+    }
+
+    public function getCodeOeuvre(): ?Oeuvre
+    {
+        return $this->codeOeuvre;
+    }
+
+    public function setCodeOeuvre(?Oeuvre $codeOeuvre): self
+    {
+        $this->codeOeuvre = $codeOeuvre;
+
+        return $this;
+    }
+
 
 }

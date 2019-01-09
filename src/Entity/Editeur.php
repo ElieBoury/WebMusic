@@ -38,5 +38,34 @@ class Editeur
      */
     private $codePays;
 
+    public function getCodeEditeur(): ?int
+    {
+        return $this->codeEditeur;
+    }
+
+    public function getNomEditeur(): ?string
+    {
+        return $this->nomEditeur;
+    }
+
+    public function setNomEditeur(string $nomEditeur): self
+    {
+        $this->nomEditeur = $nomEditeur;
+
+        return $this;
+    }
+
+    public function getCodePays(): ?Pays
+    {
+        return $this->codePays;
+    }
+
+    public function setCodePays(?Pays $codePays): self
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
 
 }

@@ -35,5 +35,34 @@ class Instrument
      */
     private $image;
 
+    public function getCodeInstrument(): ?int
+    {
+        return $this->codeInstrument;
+    }
+
+    public function getNomInstrument(): ?string
+    {
+        return $this->nomInstrument;
+    }
+
+    public function setNomInstrument(string $nomInstrument): self
+    {
+        $this->nomInstrument = $nomInstrument;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
 
 }

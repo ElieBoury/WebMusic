@@ -35,5 +35,34 @@ class TypeMorceaux
      */
     private $description;
 
+    public function getCodeType(): ?int
+    {
+        return $this->codeType;
+    }
+
+    public function getLibelleType(): ?string
+    {
+        return $this->libelleType;
+    }
+
+    public function setLibelleType(string $libelleType): self
+    {
+        $this->libelleType = $libelleType;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
 
 }

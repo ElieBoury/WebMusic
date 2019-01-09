@@ -51,5 +51,46 @@ class Interpreter
      */
     private $codeInstrument;
 
+    public function getCodeInterpreter(): ?int
+    {
+        return $this->codeInterpreter;
+    }
+
+    public function getCodeMorceau(): ?Enregistrement
+    {
+        return $this->codeMorceau;
+    }
+
+    public function setCodeMorceau(?Enregistrement $codeMorceau): self
+    {
+        $this->codeMorceau = $codeMorceau;
+
+        return $this;
+    }
+
+    public function getCodeMusicien(): ?Musicien
+    {
+        return $this->codeMusicien;
+    }
+
+    public function setCodeMusicien(?Musicien $codeMusicien): self
+    {
+        $this->codeMusicien = $codeMusicien;
+
+        return $this;
+    }
+
+    public function getCodeInstrument(): ?Instrument
+    {
+        return $this->codeInstrument;
+    }
+
+    public function setCodeInstrument(?Instrument $codeInstrument): self
+    {
+        $this->codeInstrument = $codeInstrument;
+
+        return $this;
+    }
+
 
 }

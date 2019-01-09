@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Musicien{% endblock %}
-
+{% block stylesheets %}<link rel="stylesheets" type="text/css" href="/css/style.css">{% endblock %}
 {% block body %}
     <h1>Musicien</h1>
-
+    <a href="{{ path('musicien_index') }}">back to list</a>
     <table class="table">
         <tbody>
             <tr>
@@ -29,14 +29,10 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ musicien.photo }}</td>
+                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}" 
+                        alt="Pas d'image"/></td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('musicien_index') }}">back to list</a>
-
-    <a href="{{ path('musicien_edit', {'codeMusicien': musicien.codeMusicien}) }}">edit</a>
-
-    {{ include('musicien/_delete_form.html.twig') }}
+    
 {% endblock %}

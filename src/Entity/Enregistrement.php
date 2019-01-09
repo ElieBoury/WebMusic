@@ -70,5 +70,94 @@ class Enregistrement
      */
     private $extrait;
 
+    public function getCodeMorceau(): ?int
+    {
+        return $this->codeMorceau;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getCodeComposition(): ?int
+    {
+        return $this->codeComposition;
+    }
+
+    public function setCodeComposition(int $codeComposition): self
+    {
+        $this->codeComposition = $codeComposition;
+
+        return $this;
+    }
+
+    public function getNomDeFichier(): ?string
+    {
+        return $this->nomDeFichier;
+    }
+
+    public function setNomDeFichier(string $nomDeFichier): self
+    {
+        $this->nomDeFichier = $nomDeFichier;
+
+        return $this;
+    }
+
+    public function getDuree(): ?string
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(?string $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getDureeSeconde(): ?int
+    {
+        return $this->dureeSeconde;
+    }
+
+    public function setDureeSeconde(?int $dureeSeconde): self
+    {
+        $this->dureeSeconde = $dureeSeconde;
+
+        return $this;
+    }
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getExtrait()
+    {
+        return $this->extrait;
+    }
+
+    public function setExtrait($extrait): self
+    {
+        $this->extrait = $extrait;
+
+        return $this;
+    }
+
 
 }

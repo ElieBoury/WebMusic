@@ -48,5 +48,46 @@ class Achat
      */
     private $codeAbonne;
 
+    public function getCodeAchat(): ?int
+    {
+        return $this->codeAchat;
+    }
+
+    public function getAchatConfirme(): ?bool
+    {
+        return $this->achatConfirme;
+    }
+
+    public function setAchatConfirme(?bool $achatConfirme): self
+    {
+        $this->achatConfirme = $achatConfirme;
+
+        return $this;
+    }
+
+    public function getCodeEnregistrement(): ?Enregistrement
+    {
+        return $this->codeEnregistrement;
+    }
+
+    public function setCodeEnregistrement(?Enregistrement $codeEnregistrement): self
+    {
+        $this->codeEnregistrement = $codeEnregistrement;
+
+        return $this;
+    }
+
+    public function getCodeAbonne(): ?Abonne
+    {
+        return $this->codeAbonne;
+    }
+
+    public function setCodeAbonne(?Abonne $codeAbonne): self
+    {
+        $this->codeAbonne = $codeAbonne;
+
+        return $this;
+    }
+
 
 }

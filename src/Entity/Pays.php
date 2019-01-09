@@ -28,5 +28,22 @@ class Pays
      */
     private $nomPays;
 
+    public function getCodePays(): ?int
+    {
+        return $this->codePays;
+    }
+
+    public function getNomPays(): ?string
+    {
+        return $this->nomPays;
+    }
+
+    public function setNomPays(?string $nomPays): self
+    {
+        $this->nomPays = $nomPays;
+
+        return $this;
+    }
+
 
 }

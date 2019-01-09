@@ -73,5 +73,94 @@ class Oeuvre
      */
     private $codeType;
 
+    public function getCodeOeuvre(): ?int
+    {
+        return $this->codeOeuvre;
+    }
+
+    public function getTitreOeuvre(): ?string
+    {
+        return $this->titreOeuvre;
+    }
+
+    public function setTitreOeuvre(string $titreOeuvre): self
+    {
+        $this->titreOeuvre = $titreOeuvre;
+
+        return $this;
+    }
+
+    public function getSousTitre(): ?string
+    {
+        return $this->sousTitre;
+    }
+
+    public function setSousTitre(?string $sousTitre): self
+    {
+        $this->sousTitre = $sousTitre;
+
+        return $this;
+    }
+
+    public function getTonalite(): ?string
+    {
+        return $this->tonalite;
+    }
+
+    public function setTonalite(?string $tonalite): self
+    {
+        $this->tonalite = $tonalite;
+
+        return $this;
+    }
+
+    public function getAnnee(): ?int
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(?int $annee): self
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getOpus(): ?string
+    {
+        return $this->opus;
+    }
+
+    public function setOpus(?string $opus): self
+    {
+        $this->opus = $opus;
+
+        return $this;
+    }
+
+    public function getNuméroOpus(): ?int
+    {
+        return $this->numéroOpus;
+    }
+
+    public function setNuméroOpus(?int $numéroOpus): self
+    {
+        $this->numéroOpus = $numéroOpus;
+
+        return $this;
+    }
+
+    public function getCodeType(): ?TypeMorceaux
+    {
+        return $this->codeType;
+    }
+
+    public function setCodeType(?TypeMorceaux $codeType): self
+    {
+        $this->codeType = $codeType;
+
+        return $this;
+    }
+
 
 }

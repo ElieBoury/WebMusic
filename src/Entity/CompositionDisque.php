@@ -48,5 +48,46 @@ class CompositionDisque
      */
     private $codeMorceau;
 
+    public function getCodeContenir(): ?int
+    {
+        return $this->codeContenir;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getCodeDisque(): ?Disque
+    {
+        return $this->codeDisque;
+    }
+
+    public function setCodeDisque(?Disque $codeDisque): self
+    {
+        $this->codeDisque = $codeDisque;
+
+        return $this;
+    }
+
+    public function getCodeMorceau(): ?Enregistrement
+    {
+        return $this->codeMorceau;
+    }
+
+    public function setCodeMorceau(?Enregistrement $codeMorceau): self
+    {
+        $this->codeMorceau = $codeMorceau;
+
+        return $this;
+    }
+
 
 }

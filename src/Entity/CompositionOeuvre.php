@@ -41,5 +41,34 @@ class CompositionOeuvre
      */
     private $codeComposition;
 
+    public function getCodeComposerOeuvre(): ?int
+    {
+        return $this->codeComposerOeuvre;
+    }
+
+    public function getCodeOeuvre(): ?Oeuvre
+    {
+        return $this->codeOeuvre;
+    }
+
+    public function setCodeOeuvre(?Oeuvre $codeOeuvre): self
+    {
+        $this->codeOeuvre = $codeOeuvre;
+
+        return $this;
+    }
+
+    public function getCodeComposition(): ?Composition
+    {
+        return $this->codeComposition;
+    }
+
+    public function setCodeComposition(?Composition $codeComposition): self
+    {
+        $this->codeComposition = $codeComposition;
+
+        return $this;
+    }
+
 
 }

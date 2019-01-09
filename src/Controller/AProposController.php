@@ -5,10 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/a_propos")
+ */
 class AProposController extends AbstractController
 {
     /**
-     * @Route("/a/propos", name="a_propos")
+     * @Route("/", name="a_propos_index")
      */
     public function index()
     {

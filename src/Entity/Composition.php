@@ -42,5 +42,46 @@ class Composition
      */
     private $composanteComposition;
 
+    public function getCodeComposition(): ?int
+    {
+        return $this->codeComposition;
+    }
+
+    public function getTitreComposition(): ?string
+    {
+        return $this->titreComposition;
+    }
+
+    public function setTitreComposition(string $titreComposition): self
+    {
+        $this->titreComposition = $titreComposition;
+
+        return $this;
+    }
+
+    public function getAnnee(): ?int
+    {
+        return $this->annee;
+    }
+
+    public function setAnnee(?int $annee): self
+    {
+        $this->annee = $annee;
+
+        return $this;
+    }
+
+    public function getComposanteComposition(): ?string
+    {
+        return $this->composanteComposition;
+    }
+
+    public function setComposanteComposition(?string $composanteComposition): self
+    {
+        $this->composanteComposition = $composanteComposition;
+
+        return $this;
+    }
+
 
 }

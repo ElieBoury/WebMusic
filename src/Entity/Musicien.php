@@ -86,5 +86,106 @@ class Musicien
      */
     private $codeInstrument;
 
+    public function getCodeMusicien(): ?int
+    {
+        return $this->codeMusicien;
+    }
+
+    public function getNomMusicien(): ?string
+    {
+        return $this->nomMusicien;
+    }
+
+    public function setNomMusicien(string $nomMusicien): self
+    {
+        $this->nomMusicien = $nomMusicien;
+
+        return $this;
+    }
+
+    public function getPrenomMusicien(): ?string
+    {
+        return $this->prenomMusicien;
+    }
+
+    public function setPrenomMusicien(?string $prenomMusicien): self
+    {
+        $this->prenomMusicien = $prenomMusicien;
+
+        return $this;
+    }
+
+    public function getAnneeNaissance(): ?int
+    {
+        return $this->anneeNaissance;
+    }
+
+    public function setAnneeNaissance(?int $anneeNaissance): self
+    {
+        $this->anneeNaissance = $anneeNaissance;
+
+        return $this;
+    }
+
+    public function getAnneeMort(): ?int
+    {
+        return $this->anneeMort;
+    }
+
+    public function setAnneeMort(?int $anneeMort): self
+    {
+        $this->anneeMort = $anneeMort;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getCodePays(): ?Pays
+    {
+        return $this->codePays;
+    }
+
+    public function setCodePays(?Pays $codePays): self
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
+    public function getCodeGenre(): ?Genre
+    {
+        return $this->codeGenre;
+    }
+
+    public function setCodeGenre(?Genre $codeGenre): self
+    {
+        $this->codeGenre = $codeGenre;
+
+        return $this;
+    }
+
+    public function getCodeInstrument(): ?Instrument
+    {
+        return $this->codeInstrument;
+    }
+
+    public function setCodeInstrument(?Instrument $codeInstrument): self
+    {
+        $this->codeInstrument = $codeInstrument;
+
+        return $this;
+    }
+
 
 }

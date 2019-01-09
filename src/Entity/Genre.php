@@ -28,5 +28,22 @@ class Genre
      */
     private $libelleAbrege;
 
+    public function getCodeGenre(): ?int
+    {
+        return $this->codeGenre;
+    }
+
+    public function getLibelleAbrege(): ?string
+    {
+        return $this->libelleAbrege;
+    }
+
+    public function setLibelleAbrege(string $libelleAbrege): self
+    {
+        $this->libelleAbrege = $libelleAbrege;
+
+        return $this;
+    }
+
 
 }

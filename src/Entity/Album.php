@@ -69,5 +69,82 @@ class Album
      */
     private $codeEditeur;
 
+    public function getCodeAlbum(): ?int
+    {
+        return $this->codeAlbum;
+    }
+
+    public function getTitreAlbum(): ?string
+    {
+        return $this->titreAlbum;
+    }
+
+    public function setTitreAlbum(string $titreAlbum): self
+    {
+        $this->titreAlbum = $titreAlbum;
+
+        return $this;
+    }
+
+    public function getAnneeAlbum(): ?int
+    {
+        return $this->anneeAlbum;
+    }
+
+    public function setAnneeAlbum(?int $anneeAlbum): self
+    {
+        $this->anneeAlbum = $anneeAlbum;
+
+        return $this;
+    }
+
+    public function getPochette()
+    {
+        return $this->pochette;
+    }
+
+    public function setPochette($pochette): self
+    {
+        $this->pochette = $pochette;
+
+        return $this;
+    }
+
+    public function getAsin(): ?string
+    {
+        return $this->asin;
+    }
+
+    public function setAsin(?string $asin): self
+    {
+        $this->asin = $asin;
+
+        return $this;
+    }
+
+    public function getCodeGenre(): ?Genre
+    {
+        return $this->codeGenre;
+    }
+
+    public function setCodeGenre(?Genre $codeGenre): self
+    {
+        $this->codeGenre = $codeGenre;
+
+        return $this;
+    }
+
+    public function getCodeEditeur(): ?Editeur
+    {
+        return $this->codeEditeur;
+    }
+
+    public function setCodeEditeur(?Editeur $codeEditeur): self
+    {
+        $this->codeEditeur = $codeEditeur;
+
+        return $this;
+    }
+
 
 }

@@ -41,5 +41,34 @@ class Instrumentation
      */
     private $codeInstrument;
 
+    public function getCodeInstrumentation(): ?int
+    {
+        return $this->codeInstrumentation;
+    }
+
+    public function getCodeOeuvre(): ?Oeuvre
+    {
+        return $this->codeOeuvre;
+    }
+
+    public function setCodeOeuvre(?Oeuvre $codeOeuvre): self
+    {
+        $this->codeOeuvre = $codeOeuvre;
+
+        return $this;
+    }
+
+    public function getCodeInstrument(): ?Instrument
+    {
+        return $this->codeInstrument;
+    }
+
+    public function setCodeInstrument(?Instrument $codeInstrument): self
+    {
+        $this->codeInstrument = $codeInstrument;
+
+        return $this;
+    }
+
 
 }

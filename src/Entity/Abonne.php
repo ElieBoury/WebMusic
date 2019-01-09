@@ -101,5 +101,142 @@ class Abonne
      */
     private $codePays;
 
+    public function getCodeAbonne(): ?int
+    {
+        return $this->codeAbonne;
+    }
+
+    public function getNomAbonne(): ?string
+    {
+        return $this->nomAbonne;
+    }
+
+    public function setNomAbonne(string $nomAbonne): self
+    {
+        $this->nomAbonne = $nomAbonne;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(?string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(?string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getUserid(): ?string
+    {
+        return $this->userid;
+    }
+
+    public function setUserid(?string $userid): self
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    public function getCredit(): ?int
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(?int $credit): self
+    {
+        $this->credit = $credit;
+
+        return $this;
+    }
+
+    public function getPrenomAbonne(): ?string
+    {
+        return $this->prenomAbonne;
+    }
+
+    public function setPrenomAbonne(?string $prenomAbonne): self
+    {
+        $this->prenomAbonne = $prenomAbonne;
+
+        return $this;
+    }
+
+    public function getCodePays(): ?Pays
+    {
+        return $this->codePays;
+    }
+
+    public function setCodePays(?Pays $codePays): self
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
 
 }

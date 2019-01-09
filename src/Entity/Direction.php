@@ -51,5 +51,46 @@ class Direction
      */
     private $codeOrchestre;
 
+    public function getCodeDirection(): ?int
+    {
+        return $this->codeDirection;
+    }
+
+    public function getCodeMusicien(): ?Musicien
+    {
+        return $this->codeMusicien;
+    }
+
+    public function setCodeMusicien(?Musicien $codeMusicien): self
+    {
+        $this->codeMusicien = $codeMusicien;
+
+        return $this;
+    }
+
+    public function getCodeMorceau(): ?Enregistrement
+    {
+        return $this->codeMorceau;
+    }
+
+    public function setCodeMorceau(?Enregistrement $codeMorceau): self
+    {
+        $this->codeMorceau = $codeMorceau;
+
+        return $this;
+    }
+
+    public function getCodeOrchestre(): ?Orchestres
+    {
+        return $this->codeOrchestre;
+    }
+
+    public function setCodeOrchestre(?Orchestres $codeOrchestre): self
+    {
+        $this->codeOrchestre = $codeOrchestre;
+
+        return $this;
+    }
+
 
 }

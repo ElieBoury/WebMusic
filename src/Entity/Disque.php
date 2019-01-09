@@ -45,5 +45,46 @@ class Disque
      */
     private $codeAlbum;
 
+    public function getCodeDisque(): ?int
+    {
+        return $this->codeDisque;
+    }
+
+    public function getReferenceAlbum(): ?string
+    {
+        return $this->referenceAlbum;
+    }
+
+    public function setReferenceAlbum(string $referenceAlbum): self
+    {
+        $this->referenceAlbum = $referenceAlbum;
+
+        return $this;
+    }
+
+    public function getReferenceDisque(): ?string
+    {
+        return $this->referenceDisque;
+    }
+
+    public function setReferenceDisque(?string $referenceDisque): self
+    {
+        $this->referenceDisque = $referenceDisque;
+
+        return $this;
+    }
+
+    public function getCodeAlbum(): ?Album
+    {
+        return $this->codeAlbum;
+    }
+
+    public function setCodeAlbum(?Album $codeAlbum): self
+    {
+        $this->codeAlbum = $codeAlbum;
+
+        return $this;
+    }
+
 
 }
