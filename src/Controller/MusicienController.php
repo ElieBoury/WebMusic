@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\DomCrawler\Image;
-
+use App\Repository\MusicienRepository;
 /**
  * @Route("/musicien")
  */
@@ -22,7 +22,7 @@ class MusicienController extends AbstractController
     {
         $musiciens = $this->getDoctrine()
             ->getRepository(Musicien::class)
-            ->findBy([], null, 10);
+            ->findBy([],null,10);
 
         return $this->render('musicien/index.html.twig', [
             'musiciens' => $musiciens]);
@@ -59,4 +59,11 @@ class MusicienController extends AbstractController
         $response = new Response();
         return $response;
     }
+
+
+//    public function filtreMusicien($musicien){
+//        $em = $this->getDoctrine()->getManager();
+//        $data=$em->getRepository(Musicien :: class)->findAll();
+//        $sql = $em->
+//    }
 }
