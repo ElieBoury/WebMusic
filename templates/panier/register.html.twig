@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'enregistrement {% endblock %}
+{% form_theme formRegister 'bootstrap_4_layout.html.twig' %}
+
+{% block title %} Page d'enregistrement {% endblock %}
 
 {% block body %}
 <style>
@@ -12,7 +14,14 @@
 
     <h1>Créer un compte</h1>
 
-    {{ form(formRegister) }}
+    {{ form_start(formRegister) }}
+
+    {{ form_row (formRegister.nomAbonne, {'attr' : {'Label' : "Nom", 'placeholder' : "Nom" }}) }}
+    {{ form_row (formRegister.prenomAbonne, {'attr' : {'placeholder' : "Prenom" }}) }}
+    {{ form_row (formRegister.login, {'attr' : {'placeholder' : "Login" }}) }}
+    {{ form_row (formRegister.password, {'attr' : {'placeholder' : "Password" }}) }}
+
+    {{ form_end(formRegister) }}
 
 </div>
 

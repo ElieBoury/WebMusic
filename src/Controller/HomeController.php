@@ -26,4 +26,14 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    /**
+     * @Route("/mon_compte", name="compte")
+     */
+    public function compte()
+    {
+        return $this->render('home/compte.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

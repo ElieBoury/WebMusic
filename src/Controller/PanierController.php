@@ -9,6 +9,8 @@ use App\Entity\Abonne;
 use Symfony\Component\HttpFoundation\Request;   
 use Symfony\Component\Form\Forms;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * @Route("/panier")
@@ -37,19 +39,30 @@ class PanierController extends AbstractController
 
     /**
      * @Route("/enregistrer", name="register")
+     * @Route("/{id}/modifierInfos", name="modify")
      */
-    public function register(Request $request, ObjectManager $manager)
+    public function register(Abonne $user = null, Request $request, ObjectManager $manager)
     {
+
         $user = new Abonne();
-        $form = $this->createFormBuiler($user)
-                    ->add('name')
-                    ->add('surname')
+        $form = $this->createFormBuilder($user)
+                    ->add('nomAbonne')
+                    ->add('prenomAbonne')
                     ->add('login')
                     ->add('password')
+                    ->add('register', SubmitType::class, [
+                        'label' => "S'enregistrer"
+                    ])
                     ->getForm();
 
-        $manager->persist($user);
-        $manager->flush();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+            $manager->flush();
+
+            return $this->redirectToRoute('home_main');
+        }
 
     return $this->render('panier\register.html.twig', [
         'formRegister' => $form->createView()

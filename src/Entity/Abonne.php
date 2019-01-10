@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Abonne
@@ -25,6 +26,7 @@ class Abonne
      * @var string
      *
      * @ORM\Column(name="Nom_Abonne", type="string", length=50, nullable=false)
+     * @Assert\Length(min=1, max=5)
      */
     private $nomAbonne;
 
@@ -67,11 +69,15 @@ class Abonne
      * @var string|null
      *
      * @ORM\Column(name="Email", type="string", length=0, nullable=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' n'est pas valide."
+     * )
      */
     private $email;
 
     /**
      * @var string|null
+     * 
      *
      * @ORM\Column(name="UserId", type="string", length=128, nullable=true)
      */
