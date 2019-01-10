@@ -9,7 +9,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="{{ path('home_main')}}">WebMusic</a>{#Mettre lien vers page d'accueil#}
+      <a class="navbar-brand" href="{{ path('home_main')}}">WebMusic</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" 
       data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" 
       aria-label="Toggle navigation">
@@ -22,14 +22,15 @@
             <a class="nav-link" href="{{ path('musicien_index')}}"> Catalogue <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ path('panier_index')}}"> Mon panier </a>
+            <a class="nav-link" href="{{ path('panier')}}"> Mon panier </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ path('a_propos_main')}}"> A Propos </a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn-secondary my-2 my-sm-0" type=""> Connexion </button>
+          <a href="{{ path('connexion')}}">
+           <input type="button" value="Authentification"> </a>
         </form>
       </div>
     </nav>
