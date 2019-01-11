@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_panier")
+     * @Route("/panier", name="user_panier")
      */
     public function panier()
     {
@@ -36,13 +36,19 @@ class UserController extends AbstractController
     public function register(Abonne $user = null, Request $request, ObjectManager $manager,
     UserPasswordEncoderInterface $encoder)
     {
-
-        $user = new Abonne();
+        if($user == null) {
+            $user = new Abonne();
+        }
+        
         $form = $this->createFormBuilder($user)
                     ->add('nomAbonne')
                     ->add('prenomAbonne')
                     ->add('email')
                     ->add('login')
+                    ->add('adresse')
+                    ->add('codePostal')
+                    ->add('ville')
+                    //->add('codePays')
                     ->add('password', PasswordType::class)
                     ->add('confirm_password', PasswordType::class)
                     ->getForm();

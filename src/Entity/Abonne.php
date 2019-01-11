@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Abonne implements UserInterface
 {
-    /**
+    /**     
      * @var int
      *
      * @ORM\Column(name="Code_Abonne", type="integer", nullable=false)
@@ -32,23 +32,24 @@ class Abonne implements UserInterface
      * @var string
      *
      * @ORM\Column(name="Nom_Abonne", type="string", length=50, nullable=false)
-     * @Assert\Length(min="1", max="255")
+     * @Assert\Length(max="50", maxMessage="Votre nom doit comporter moins de 50 caractères.")
      */
     private $nomAbonne;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Login", type="string", length=10, nullable=true)
-     * @Assert\Length(max="255")
+     * @ORM\Column(name="Login", type="string", length=50, nullable=true)
+     * @Assert\Length(max="50", maxMessage="Votre identifiant doit comporter moins de 50 caractères.")
      */
     private $login;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Password", type="string", length=80, nullable=true)
-     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire 8 caractères au minimum.")
+     * @ORM\Column(name="Password", type="string", length=30, nullable=true)
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit comporter 8 caractères au minimum.",
+     *                 max="30", maxMessage="Votre mot de passe doit comporter moins de 30 caractères.")
      */
     private $password;
 
@@ -62,21 +63,24 @@ class Abonne implements UserInterface
     /**
      * @var string|
      *
-     * @ORM\Column(name="Adresse", type="string", length=50, nullable=true)
+     * @ORM\Column(name="Adresse", type="string", length=200, nullable=true)
+     * @Assert\Length(min="0", max="200", maxMessage="Votre adresse doit comporter moins de 200 caractères.")
      */
     private $adresse;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Ville", type="string", length=50, nullable=true)
+     * @ORM\Column(name="Ville", type="string", length=100, nullable=true)
+     * @Assert\Length(min="0", max="200", maxMessage="Votre ville doit comporter moins de 100 caractères.")
      */
     private $ville;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Code_Postal", type="string", length=50, nullable=true)
+     * @ORM\Column(name="Code_Postal", type="string", length=5, nullable=true)
+     * @Assert\Length(min="0", max="5", maxMessage="Le code postal doit comporter 5 caractères.")
      */
     private $codePostal;
 
@@ -106,7 +110,8 @@ class Abonne implements UserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Prenom_Abonne", type="string", length=40, nullable=true)
+     * @ORM\Column(name="Prenom_Abonne", type="string", length=50, nullable=true)
+     * @Assert\Length(max="50", maxMessage="Votre prénom doit comporter moins de 50 caractères.")
      */
     private $prenomAbonne;
 
@@ -117,6 +122,7 @@ class Abonne implements UserInterface
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Code_Pays", referencedColumnName="Code_Pays")
      * })
+     * @Assert\Length(min="0", max="100", maxMessage="Votre pays doit comporter moins de 100 caractères.")
      */
     private $codePays;
 
