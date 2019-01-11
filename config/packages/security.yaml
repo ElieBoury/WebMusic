@@ -1,13 +1,26 @@
 security:
+    encoders:
+        App\Entity\Abonne:
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        in_database: 
+            entity:
+                class: App\Entity\Abonne
+                property: email, login  
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             anonymous: true
+
+            provider: in_database
+
+            form_login: 
+                login_path: user_login
+                check_path: user_login
 
             # activate different ways to authenticate
 

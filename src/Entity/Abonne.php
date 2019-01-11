@@ -4,14 +4,20 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Abonne
  *
  * @ORM\Table(name="Abonne", indexes={@ORM\Index(name="IDX_719E8EC620B77BF2", columns={"Code_Pays"})})
  * @ORM\Entity
+ * @UniqueEntity(
+ *  fields={"email", "login"},
+ *  message="Email ou identifiant déjà existant."
+ * )
  */
-class Abonne
+class Abonne implements UserInterface
 {
     /**
      * @var int
@@ -26,7 +32,7 @@ class Abonne
      * @var string
      *
      * @ORM\Column(name="Nom_Abonne", type="string", length=50, nullable=false)
-     * @Assert\Length(min=1, max=5)
+     * @Assert\Length(min="1", max="255")
      */
     private $nomAbonne;
 
@@ -34,6 +40,7 @@ class Abonne
      * @var string|null
      *
      * @ORM\Column(name="Login", type="string", length=10, nullable=true)
+     * @Assert\Length(max="255")
      */
     private $login;
 
@@ -41,11 +48,19 @@ class Abonne
      * @var string|null
      *
      * @ORM\Column(name="Password", type="string", length=80, nullable=true)
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire 8 caractères au minimum.")
      */
     private $password;
 
     /**
      * @var string|null
+     *
+     * @Assert\EqualTo(propertyPath="password", message="Veuillez insérer des mots de passe identiques.")
+     */
+    private $confirm_password;
+
+    /**
+     * @var string|
      *
      * @ORM\Column(name="Adresse", type="string", length=50, nullable=true)
      */
@@ -68,10 +83,8 @@ class Abonne
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Email", type="string", length=0, nullable=true)
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' n'est pas valide."
-     * )
+     * @ORM\Column(name="Email", type="string", length=50, nullable=true)
+     * @Assert\Email()
      */
     private $email;
 
@@ -144,6 +157,18 @@ class Abonne
     public function setPassword(?string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getConfirmPassword(): ?string
+    {
+        return $this->confirm_password;
+    }
+
+    public function setConfirmPassword(?string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
 
         return $this;
     }
@@ -244,5 +269,24 @@ class Abonne
         return $this;
     }
 
+    public function eraseCredentials()
+    {
+        
+    }
+
+    public function getSalt()
+    {
+        
+    }
+
+    public function getRoles()
+    {
+        return ['ROLES_USER'];
+    }
+
+    public function getUsername()
+    {
+        
+    }
 
 }
