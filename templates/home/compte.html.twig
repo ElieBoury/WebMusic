@@ -11,7 +11,12 @@
 <div class="example-wrapper">
     <h1>Mon compte</h1>
 
-    <a href="{{ path('modify')}}" > Modifier mes informations </a> 
+    <ul>
+        <li><a href="{{ path('user_modify') }}">Modifier mes informations</a></li>
+        <li>Historique de mes achats</li>
+        <li>Me désincrire</li>
+    </ul>
+    {#<a href="{{ path('modify')}}" > Modifier mes informations </a> #}
 
 </div>
 {% endblock %}

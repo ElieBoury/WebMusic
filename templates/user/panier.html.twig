@@ -9,8 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Mon panier</h1>
+    {% if app.user %}
+        <h1>Mon panier</h1>
 
-    <p>Panier in coming boyz</p>
+        <p>Panier in coming boyz</p>
+    {% else %}
+        <p>Veuillez vous identifier afin d'accéder à votre panier. </p>
+    {% endif %}
 </div>
 {% endblock %}

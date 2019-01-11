@@ -30,18 +30,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/login", name="user_login")
-     */
-    public function login()
-    {
-        return $this->render('user/login.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
-
-    /**
      * @Route("/enregistrer", name="user_register")
-     * @Route("/{id}/modifierInfos", name="modify")
+     * @Route("/modify", name="user_modify")
      */
     public function register(Abonne $user = null, Request $request, ObjectManager $manager,
     UserPasswordEncoderInterface $encoder)
@@ -74,4 +64,18 @@ class UserController extends AbstractController
     ]);
     }
 
+    /**
+     * @Route("/login", name="user_login")
+     */
+    public function login()
+    {
+        return $this->render('user/login.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+    /**
+     * @Route("/logout", name="user_logout")
+     */
+    public function logout() {}
 }
