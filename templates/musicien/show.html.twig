@@ -36,6 +36,13 @@
                 <th>Oeuvres</th>
                 <td><a href="{{ path('musicien_oeuvres',{'codeMusicien' : musicien.codeMusicien}) }}">Voir la liste des oeuvres</a></td>
             </tr>
+            <tr>
+                <th>Albums</th>
+                {% for album in albums %}
+                <td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
+                         alt="Pas d'image"/></td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
     

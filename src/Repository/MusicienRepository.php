@@ -33,10 +33,19 @@ class MusicienRepository extends ServiceEntityRepository
         $sql = "Select * From Oeuvre
               inner join Composer ON Oeuvre.Code_Oeuvre = Composer.Code_Oeuvre
               Where Code_Musicien = $codeM";
-        $params[':musicien'] = $musicien->getCodeMusicien();
         $stmt = $em->getConnection()->prepare($sql)/*->(':musicien',$musicien->getCodeMusicien())*/;
         $stmt->execute();
         return $stmt->fetchAll();
 
+    }
+    public function selectAlbums(Musicien $musicien){
+        $em=$this->getEntityManager();
+        $codeM = $musicien->getCodeMusicien();
+        $sql="Select * from Album join Genre on Genre.Code_Genre = Album.Code_Genre
+inner join Musicien on Genre.Code_Genre = Musicien.Code_Genre
+Where Musicien.Code_Musicien = $codeM"   ;
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

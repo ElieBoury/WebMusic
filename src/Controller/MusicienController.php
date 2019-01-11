@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Musicien;
 use App\Entity\Oeuvres;
+use App\Entity\Album;
 use App\Form\MusicienType;
+use App\Repository\OeuvresRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,17 +31,23 @@ class MusicienController extends AbstractController
             'musiciens' => $musiciens]);
     }
 
-
+    /**
+     * @Route("/oeuvres", name="oeuvres", methods="GET")
+     */
+    public function listeOeuvres(OeuvresRepository $oeuvresRepo){
+        $oeuvres=$oeuvresRepo->listeOeuvres();
+        return $this->render('musicien/listeoeuvres.html.twig',['oeuvres'=>$oeuvres]);
+    }
 
     /**
      * @Route("/{codeMusicien}", name="musicien_show", methods="GET")
      */
-    public function show(Musicien $musicien): Response
+    public function show(Musicien $musicien, MusicienRepository $musicienRepo): Response
     {
+    $albums=$musicienRepo->selectAlbums($musicien);
 
 
-
-        return $this->render('musicien/show.html.twig', ['musicien' => $musicien]);
+        return $this->render('musicien/show.html.twig', ['musicien' => $musicien,'albums'=>$albums]);
     }
 
     /**
@@ -66,7 +74,19 @@ class MusicienController extends AbstractController
         return $this->render('musicien/oeuvres.html.twig',['musicien'=>$musicien,'oeuvres'=> $oeuvres]);
     }
 
-
+    /**
+     * @Route("/{codeAlbum}/images", name="musicien_image_album",methods="GET")
+     */
+    public function imageAlbum(Album $album): Response{
+        $response = new Response();
+        $response->headers->set("Content-Type","image/jpeg");
+        $image=null;
+        if($album->getPochette()!=null){
+            $image = stream_get_contents($album->getPochette());
+        }
+        $response->setContent($image);
+        return $response;
+    }
 //    public function filtreMusicien($musicien){
 //        $em = $this->getDoctrine()->getManager();
 //        $data=$em->getRepository(Musicien :: class)->findAll();
