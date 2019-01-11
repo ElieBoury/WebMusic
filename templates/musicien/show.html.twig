@@ -34,9 +34,7 @@
             </tr>
             <tr>
                 <th>Oeuvres</th>
-                <td>{%   for oeuvre in oeuvres %}
-                    <li>{{ oeuvre.Titre_Oeuvre }}</li>
-                {%   endfor %}</td>
+                <td><a href="{{ path('musicien_oeuvres',{'codeMusicien' : musicien.codeMusicien}) }}">Voir la liste des oeuvres</a></td>
             </tr>
         </tbody>
     </table>

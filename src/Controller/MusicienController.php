@@ -34,12 +34,12 @@ class MusicienController extends AbstractController
     /**
      * @Route("/{codeMusicien}", name="musicien_show", methods="GET")
      */
-    public function show(Musicien $musicien, MusicienRepository $musicienRepo): Response
+    public function show(Musicien $musicien): Response
     {
 
-        $oeuvres=$musicienRepo->selectOeuvres($musicien);
 
-        return $this->render('musicien/show.html.twig', ['musicien' => $musicien,'oeuvres'=> $oeuvres]);
+
+        return $this->render('musicien/show.html.twig', ['musicien' => $musicien]);
     }
 
     /**
@@ -60,10 +60,10 @@ class MusicienController extends AbstractController
     /**
      * @Route("/{codeMusicien}/oeuvres", name="musicien_oeuvres", methods="GET")
      */
-    public function oeuvres(Musicien $musicien): Response
+    public function oeuvres(Musicien $musicien, MusicienRepository $musicienRepo): Response
     {
-        $response = new Response();
-        return $response;
+        $oeuvres=$musicienRepo->selectOeuvres($musicien);
+        return $this->render('musicien/oeuvres.html.twig',['musicien'=>$musicien,'oeuvres'=> $oeuvres]);
     }
 
 
