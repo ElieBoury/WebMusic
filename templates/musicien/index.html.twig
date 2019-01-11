@@ -25,7 +25,8 @@
                 <td>{{ musicien.prenomMusicien }}</td>
                 <td>{{ musicien.anneeNaissance }}</td>
                 <td>{{ musicien.anneeMort }}</td>
-                <td>{{ musicien.photo }}</td>
+                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"
+                         alt="Pas d'image"/></td>
                 <td>
                     <a href="{{ path('musicien_show', {'codeMusicien': musicien.codeMusicien}) }}">show</a>
                 </td>

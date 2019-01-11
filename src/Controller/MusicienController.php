@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Musicien;
+use App\Entity\Oeuvres;
 use App\Form\MusicienType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,20 +21,25 @@ class MusicienController extends AbstractController
      */
     public function index(): Response
     {
-        $musiciens = $this->getDoctrine()
-            ->getRepository(Musicien::class)
-            ->findBy([],null,10);
+
+            $musiciens = $this->getDoctrine()->getRepository(Musicien::class)
+                ->findBy([],null,10);
 
         return $this->render('musicien/index.html.twig', [
             'musiciens' => $musiciens]);
     }
 
+
+
     /**
      * @Route("/{codeMusicien}", name="musicien_show", methods="GET")
      */
-    public function show(Musicien $musicien): Response
+    public function show(Musicien $musicien, MusicienRepository $musicienRepo): Response
     {
-        return $this->render('musicien/show.html.twig', ['musicien' => $musicien]);
+
+        $oeuvres=$musicienRepo->selectOeuvres($musicien);
+
+        return $this->render('musicien/show.html.twig', ['musicien' => $musicien,'oeuvres'=> $oeuvres]);
     }
 
     /**

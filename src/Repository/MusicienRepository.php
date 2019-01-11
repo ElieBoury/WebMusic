@@ -24,5 +24,19 @@ class MusicienRepository extends ServiceEntityRepository
 
     public function selectAll(){
         $em = $this->getEntityManager()->createQuery('SELECT * FROM Musicien FETCH 10 NEXT ROWS ONLY')->getResult();
+
+    }
+
+    public function selectOeuvres(Musicien $musicien){
+        $em=$this->getEntityManager();
+        $codeM = $musicien->getCodeMusicien();
+        $sql = "Select * From Oeuvre
+              inner join Composer ON Oeuvre.Code_Oeuvre = Composer.Code_Oeuvre
+              Where Code_Musicien = $codeM";
+        $params[':musicien'] = $musicien->getCodeMusicien();
+        $stmt = $em->getConnection()->prepare($sql)/*->(':musicien',$musicien->getCodeMusicien())*/;
+        $stmt->execute();
+        return $stmt->fetchAll();
+
     }
 }

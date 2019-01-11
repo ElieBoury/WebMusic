@@ -32,6 +32,12 @@
                 <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}" 
                         alt="Pas d'image"/></td>
             </tr>
+            <tr>
+                <th>Oeuvres</th>
+                <td>{%   for oeuvre in oeuvres %}
+                    <li>{{ oeuvre.Titre_Oeuvre }}</li>
+                {%   endfor %}</td>
+            </tr>
         </tbody>
     </table>
     
