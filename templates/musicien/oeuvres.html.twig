@@ -10,7 +10,7 @@
     <div class="list">
             <h1>Oeuvres</h1>
             {%  for oeuvre in oeuvres %}
-                    <li>{{ oeuvre.Titre_Oeuvre }}</li>
+                    <li><a href="{{ path('musicien_oeuvres_show',{'codeOeuvre' : oeuvre.Code_Oeuvre,'codeMusicien' : musicien.codeMusicien}) }}">{{ oeuvre.Titre_Oeuvre }}</a></li>
                 {%   endfor %}</div>
     </table>
     <div class="back" ><a href="{{ path('musicien_index') }}">back to list</a></div>

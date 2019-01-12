@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Musicien{% endblock %}
+{% block stylesheets %}<link rel="stylesheets" type="text/css" href="/css/style.css">{% endblock %}
+{% block body %}
+    <h1>Oeuvre</h1>
+    <a href="{{ path('musicien_index') }}">back to list</a>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>CodeOeuvre</th>
+            <td>{{ oeuvre.codeOeuvre }}</td>
+        </tr>
+        <tr>
+            <th>TitreOeuvre</th>
+            <td>{{ oeuvre.titreOeuvre }}</td>
+        </tr>
+        <tr>
+            <th>Tonalité</th>
+            <td>{{ oeuvre.tonalite }}</td>
+        </tr>
+        <tr>
+            <th>Annee</th>
+            <td>{{ oeuvre.annee }}</td>
+        </tr>
+        <tr>
+            <th>Opus</th>
+            <td>{{ oeuvre.opus }}</td>
+        </tr>
+        <tr>
+            <tr>
+            <th>Albums</th>
+            {% for album in albums %}
+            <td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
+            alt="Pas d'image"/></td>
+            {% endfor %}
+            </tr>
+            {#<th>Photo</th>#}
+            {#<td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"#}
+                     {#alt="Pas d'image"/></td>#}
+        {#</tr>#}
+        {#<tr>#}
+            {#<th>Oeuvres</th>#}
+            {#<td><a href="{{ path('musicien_oeuvres',{'codeMusicien' : musicien.codeMusicien}) }}">Voir la liste des oeuvres</a></td>#}
+        {#</tr>#}
+
+        </tbody>
+    </table>
+
+{% endblock %}

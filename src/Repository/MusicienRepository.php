@@ -38,14 +38,5 @@ class MusicienRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
 
     }
-    public function selectAlbums(Musicien $musicien){
-        $em=$this->getEntityManager();
-        $codeM = $musicien->getCodeMusicien();
-        $sql="Select * from Album join Genre on Genre.Code_Genre = Album.Code_Genre
-inner join Musicien on Genre.Code_Genre = Musicien.Code_Genre
-Where Musicien.Code_Musicien = $codeM"   ;
-        $stmt = $em->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
+
 }

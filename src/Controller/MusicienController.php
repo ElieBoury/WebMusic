@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Musicien;
-use App\Entity\Oeuvres;
+use App\Entity\Oeuvre;
 use App\Entity\Album;
 use App\Form\MusicienType;
 use App\Repository\OeuvresRepository;
@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\DomCrawler\Image;
 use App\Repository\MusicienRepository;
+
 /**
  * @Route("/musicien")
  */
@@ -44,10 +45,9 @@ class MusicienController extends AbstractController
      */
     public function show(Musicien $musicien, MusicienRepository $musicienRepo): Response
     {
-    $albums=$musicienRepo->selectAlbums($musicien);
 
 
-        return $this->render('musicien/show.html.twig', ['musicien' => $musicien,'albums'=>$albums]);
+        return $this->render('musicien/show.html.twig', ['musicien' => $musicien]);
     }
 
     /**
@@ -73,7 +73,13 @@ class MusicienController extends AbstractController
         $oeuvres=$musicienRepo->selectOeuvres($musicien);
         return $this->render('musicien/oeuvres.html.twig',['musicien'=>$musicien,'oeuvres'=> $oeuvres]);
     }
-
+    /**
+     * @Route("/{codeMusicien}/oeuvres/{codeOeuvre}", name="musicien_oeuvres_show", methods="GET")
+     */
+    public function showOeuvres(Musicien $musicien,Oeuvre $oeuvre, OeuvresRepository $oeuvresRepo){
+        $albums=$oeuvresRepo->selectAlbums($oeuvre);
+        return $this->render('musicien/showOeuvre.html.twig', ['oeuvre'=> $oeuvre, 'albums'=>$albums]);
+    }
     /**
      * @Route("/{codeAlbum}/images", name="musicien_image_album",methods="GET")
      */
