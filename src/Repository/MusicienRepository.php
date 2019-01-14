@@ -31,13 +31,15 @@ class MusicienRepository extends ServiceEntityRepository
     }
     public function selectFilter($filtre){
         $em = $this->getEntityManager();
-        $fi= $filtre.'%';
-        $sql = "Select * from Musicien where Nom_Musicien like '$filtre%' ";//OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
+       //OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
       //  $stmt = $em->getConnection()->query("Select * from Musicien where Nom_Musicien like 'nom'  ");/* FETCH 10 NEXT ROWS ONLY*/
-
-        $stmt = $em->getConnection()->prepare($sql);
-        $stmt->execute();//array(['nom'=>$filtre.'%'])
-        return $stmt->fetchAll();
+        $rsn = new ResultSetMappingBuilder($em);
+        $rsn->addRootEntityFromClassMetadata(Musicien::class,'Musicien');
+        $sql = "Select * from Musicien where Nom_Musicien like :filtre ";
+        $query=$em->createNativeQuery($sql,$rsn);
+        $query->setParameter(':filtre',$filtre.'%');
+        $query->execute();
+        return $query->getResult();
     }
 
     public function selectOeuvres(Musicien $musicien){

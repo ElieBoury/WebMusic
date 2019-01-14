@@ -28,7 +28,8 @@ inner join Disque on Disque.Code_Album = Album.Code_Album
 inner join Composition_Disque on Composition_Disque.Code_Disque = Disque.Code_Disque
 inner join Interpreter on Composition_Disque.Code_Morceau = Interpreter.Code_Morceau
 inner join Instrumentation on Interpreter.Code_Instrument = Instrumentation.Code_Instrument
-where Instrumentation.Code_Oeuvre = $codeO"   ;
+inner join Composer on Instrumentation.Code_Oeuvre = Composer.Code_Oeuvre
+where Composer.Code_Musicien = $codeO"   ;
         $stmt = $em->getConnection()->prepare($sql);;
         $stmt->execute();
         return $stmt->fetchAll();
