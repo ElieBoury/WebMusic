@@ -22,15 +22,28 @@ class MusicienRepository extends ServiceEntityRepository
     }
 
 
-    public function selectAll(){
-        $em = $this->getEntityManager()->createQuery('SELECT * FROM Musicien FETCH 10 NEXT ROWS ONLY')->getResult();
+    public function selectAllCount(){
+    $em = $this->getEntityManager();
+    $sql ="Select Count(*) from Musicien";
+    $stmt = $em->getConnection()->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll();
+    }
+    public function selectFilter($filtre){
+        $em = $this->getEntityManager();
+        $fi= $filtre.'%';
+        $sql = "Select * from Musicien where Nom_Musicien like '$filtre%' ";//OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
+      //  $stmt = $em->getConnection()->query("Select * from Musicien where Nom_Musicien like 'nom'  ");/* FETCH 10 NEXT ROWS ONLY*/
 
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();//array(['nom'=>$filtre.'%'])
+        return $stmt->fetchAll();
     }
 
     public function selectOeuvres(Musicien $musicien){
         $em=$this->getEntityManager();
         $codeM = $musicien->getCodeMusicien();
-        $sql = "Select * From Oeuvre
+        $sql =         "Select * From Oeuvre
               inner join Composer ON Oeuvre.Code_Oeuvre = Composer.Code_Oeuvre
               Where Code_Musicien = $codeM";
         $stmt = $em->getConnection()->prepare($sql)/*->(':musicien',$musicien->getCodeMusicien())*/;

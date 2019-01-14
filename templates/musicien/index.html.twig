@@ -4,7 +4,14 @@
 
 {% block body %}
     <h1>Musicien index</h1>
+    <form method="post" action="{{ path('musicien_indexF') }}">
 
+        <input required type="text" name="filtre" placeholder="Filtre par nom" >
+
+        <input type="submit" value="Filtrer" />
+
+    </form>
+    <br>
     <table class="table">
         <thead>
             <tr>
@@ -20,15 +27,15 @@
         <tbody>
         {% for musicien in musiciens %}
             <tr>
-                <td>{{ musicien.codeMusicien }}</td>
-                <td>{{ musicien.nomMusicien }}</td>
-                <td>{{ musicien.prenomMusicien }}</td>
-                <td>{{ musicien.anneeNaissance }}</td>
-                <td>{{ musicien.anneeMort }}</td>
-                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"
+                <td>{{ musicien.Code_Musicien }}</td>
+                <td>{{ musicien.Nom_Musicien }}</td>
+                <td>{{ musicien.Prenom_Musicien }}</td>
+                <td>{{ musicien.Annee_Naissance }}</td>
+                <td>{{ musicien.Annee_Mort }}</td>
+                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.Code_Musicien}) }}"
                          alt="Pas d'image"/></td>
                 <td>
-                    <a href="{{ path('musicien_show', {'codeMusicien': musicien.codeMusicien}) }}">show</a>
+                    <a href="{{ path('musicien_show', {'codeMusicien': musicien.Code_Musicien}) }}">show</a>
                 </td>
             </tr>
         {% else %}
@@ -38,5 +45,22 @@
         {% endfor %}
         </tbody>
     </table>
+
+    {#{% for nombre in nombres%}#}
+    {#<div class="centre">#}
+        {#<ul class="pagination pagination-sm">#}
+            {#<li class="page-item disabled">#}
+                {#<a class="page-link" href="#">&laquo;</a>#}
+            {#</li>#}
+            {#<li class="page-item active">#}
+                {#<a class="page-link" href="#"> 1</a>#}
+            {#</li>#}
+            {#<li class="page-item">#}
+                {#<a class="page-link" href="#">&raquo;</a>#}
+            {#</li>#}
+        {#</ul>#}
+    {#</div>#}
+
+{#{% endfor %}#}
 
 {% endblock %}

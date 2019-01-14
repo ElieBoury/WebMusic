@@ -18,20 +18,29 @@ use App\Repository\MusicienRepository;
  * @Route("/musicien")
  */
 class MusicienController extends AbstractController
-{
+{//#{numeroPage}
     /**
      * @Route("/", name="musicien_index", methods="GET")
      */
-    public function index(): Response
+    public function index(MusicienRepository $musicienRepo): Response
     {
 
             $musiciens = $this->getDoctrine()->getRepository(Musicien::class)
                 ->findBy([],null,10);
-
+        $nombre = $musicienRepo->selectAllCount();
+        //$nombre=$nombres/10;
         return $this->render('musicien/index.html.twig', [
-            'musiciens' => $musiciens]);
+            'musiciens' => $musiciens, 'nombres'=>$nombre]);
     }
-
+    /**
+     * @Route("/#", name="musicien_indexF")
+     */
+    public function indexFilter(Request $request, MusicienRepository $musicienRepo): Response{
+        //$filtre = $request->get($_POST)['filtre'];
+            $filtre = $_POST['filtre'];
+        $musiciens= $musicienRepo->selectFilter($filtre);
+        return $this->render('musicien/index.html.twig', ['musiciens'=>$musiciens]);
+    }
     /**
      * @Route("/oeuvres", name="oeuvres", methods="GET")
      */
