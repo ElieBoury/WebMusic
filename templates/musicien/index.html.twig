@@ -49,19 +49,24 @@
     </table>
 
     {#{% for nombre in nombres%}#}
-    {#<div class="centre">#}
-        {#<ul class="pagination pagination-sm">#}
-            {#<li class="page-item disabled">#}
-                {#<a class="page-link" href="#">&laquo;</a>#}
-            {#</li>#}
-            {#<li class="page-item active">#}
-                {#<a class="page-link" href="#"> 1</a>#}
-            {#</li>#}
-            {#<li class="page-item">#}
-                {#<a class="page-link" href="#">&raquo;</a>#}
-            {#</li>#}
-        {#</ul>#}
-    {#</div>#}
+
+    <div class="centre">
+        <ul class="pagination pagination-sm">
+            {% if numPage==1 %}
+            <li class="page-item disabled">
+             {% else %}
+                <li class="page-item active">
+              {% endif %}
+                <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  numPage-1}) }}">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  1}) }}"> 1</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' : numPage+1}) }}">&raquo;</a>
+            </li>
+        </ul>
+    </div>
 
 {#{% endfor %}#}
 

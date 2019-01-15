@@ -29,6 +29,16 @@ class MusicienRepository extends ServiceEntityRepository
     $stmt->execute();
     return $stmt->fetchAll();
     }
+    public function selectAllCountFilter($filtre){
+        $em =$this->getEntityManager();
+        $rsn = new ResultSetMappingBuilder($em);
+        $rsn->addRootEntityFromClassMetadata(Musicien::class, 'Musicien');
+        $sql = "Select Count(*) from Musicien where Nom_Musicien like :filtre";
+        $query=$em->createNativeQuery($sql,$rsn);
+        $query->setParameter(':filtre',$filtre.'%');
+        $query->execute();
+        return $query->getResult();
+    }
     public function selectFilter($filtre){
         $em = $this->getEntityManager();
        //OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
