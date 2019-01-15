@@ -181,16 +181,10 @@ class UserController extends AbstractController
     /**
      * @Route("/logout", name="user_logout")
      */
-<<<<<<< HEAD
-    public function logout()
-    {
-    }
-=======
+
     public function logout() {
         return $this->render('home/home.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
-
->>>>>>> c9f89bd27d66fdfdff5a3205d9f4c31cae6b85ba
 }
