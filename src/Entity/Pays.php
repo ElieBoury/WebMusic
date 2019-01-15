@@ -45,5 +45,9 @@ class Pays
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->nomPays;
+    }
 
 }

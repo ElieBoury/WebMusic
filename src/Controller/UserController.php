@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @Route("/user")
@@ -24,9 +25,9 @@ class UserController extends AbstractController
 {
     /**
      *  @Route("/panier", name="user_panier")
-     *  @Route("/{codeAbonne}/panier" ,name="user_panier1")
+     *  @Route("/{codeAbonne}/panier", name="user_panier1")
      */
-    public function panier(Abonne $abonne=Null,AbonneRepository $abonneRepo)
+    public function panier(Abonne $abonne = null,AbonneRepository $abonneRepo)
 {
     if (!$abonne) {
         return $this->render('user/panier.html.twig', [
@@ -36,8 +37,8 @@ class UserController extends AbstractController
     } else {
         $achats = $abonneRepo->achatsNonConfirmes($abonne);
         return $this->render('user/panier.html.twig', [
-
-            'achats' => $achats,'controller_name' => 'UserController',
+            'achats' => $achats,
+            'controller_name' => 'UserController',
         ]);
     }
 }
@@ -46,19 +47,19 @@ class UserController extends AbstractController
     //TODO Modify
     /**
      * @Route("/enregistrer", name="user_register")
-     * @Route("/modify", name="user_modify")
+     * @Route("/{codeAbonne}/modify", name="user_modify")
      */
     public function register(
-        Abonne $user = null,
+        Abonne $abonne = null,
         Request $request,
         ObjectManager $manager,
         UserPasswordEncoderInterface $encoder
     ) {
-        if ($user == null) {
-            $user = new Abonne();
+        if (!$abonne) {
+            $abonne = new Abonne();
         }
 
-        $form = $this->createFormBuilder($user)
+        $form = $this->createFormBuilder($abonne)
             ->add('nomAbonne', null, [
                 'label' => 'Nom*',
                 'attr' => [
@@ -108,56 +109,37 @@ class UserController extends AbstractController
                     'required' => false
                 ]
             ])
-
-            /*->add('codePays', Pays::class, [
+            ->add('codePays', null, [
                 'label' => 'Pays',
                 'attr' => [
                     'placeholder' => 'ex: France',
                     'required' => false
                 ]
-            ])*/
-
+            ])
             ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe*',
-                'attr' => [
-                    'placeholder' => 'Mot de passe',
-                    'required' => true
-                ]
-            ])
+                    'label' => 'Mot de passe*',
+                    'attr' => [
+                        'placeholder' => 'Mot de passe',
+                        'required' => true
+                    ]
+                ])
             ->add('confirm_password', PasswordType::class, [
-                    'label' => 'Confirmer le mot de passe',
-                    'attr' => [
-                        'placeholder' => 'Confirmer le mot de passe',
-                        'required' => true
-                    ]
-            ])
+                        'label' => 'Confirmer le mot de passe*',
+                        'attr' => [
+                            'placeholder' => 'Confirmer le mot de passe',
+                            'required' => true
+                        ]
+                ])
             ->getForm();
-
-        //if ($user == null) {
-            /*$form->add('password', PasswordType::class, [
-                'label' => 'Mot de passe*',
-                'attr' => [
-                    'placeholder' => 'Mot de passe',
-                    'required' => true
-                ]
-            ])
-                ->add('confirm_password', PasswordType::class, [
-                    'label' => 'Confirmer le mot de passe',
-                    'attr' => [
-                        'placeholder' => 'Confirmer le mot de passe',
-                        'required' => true
-                    ]
-            ])
-            ->getForm();*/
-        //}
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($hash);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $hash = $encoder->encodePassword($abonne, $abonne->getPassword());
+            $abonne->setPassword($hash);
 
-            $manager->persist($user);
+            $manager->persist($abonne);
             $manager->flush();
 
             return $this->redirectToRoute('user_login');
@@ -167,6 +149,7 @@ class UserController extends AbstractController
             'formRegister' => $form->createView()
         ]);
     }
+
 
     /**
      * @Route("/login", name="user_login")
@@ -181,7 +164,8 @@ class UserController extends AbstractController
     /**
      * @Route("/logout", name="user_logout")
      */
-    public function logout() {
+    public function logout()
+    {
         return $this->render('home/home.html.twig', [
             'controller_name' => 'UserController',
         ]);

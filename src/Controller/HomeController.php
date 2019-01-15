@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Abonne;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -28,12 +29,15 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/mon_compte", name="home_compte")
+     * @Route("/{codeAbonne}/mon_compte", name="home_compte")
      */
-    public function compte()
+    public function compte(Abonne $abonne)
     {
+        $codeAbonne = $abonne->getCodeAbonne();
+
         return $this->render('home/compte.html.twig', [
             'controller_name' => 'HomeController',
+            'codeAbonne' => $codeAbonne 
         ]);
     }
 }
