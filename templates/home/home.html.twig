@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block activeHome %} active {% endblock %}
+
 {% block title %}Page d'accueil{% endblock %}
 
 {% block body %}
@@ -7,7 +9,11 @@
 <div class="example-wrapper">
     <h1>WebMusic - Catalogue de musiciens</h1>
 
-    <p>Description du site</p>
+    <p>Bienvenue sur WebMusic !</p>
+    <ul>Avec WebMusic, 
+        <li>Consultez les meilleurs musiciens classique de notre ère !</li>
+        <li>Identifiez-vous et achetez tous les albums que vous désirez !</li>
+    </ul>
 </div>
 
 {% endblock %}
