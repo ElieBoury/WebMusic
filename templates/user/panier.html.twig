@@ -11,8 +11,15 @@
 <div class="example-wrapper">
     {% if app.user %}
         <h1>Mon panier</h1>
-
-        <p>Panier in coming boyz</p>
+        {% if   not achats %}
+            <h3>Vous n'avez pas encore d'achats</h3>
+            {#Ajouter un lien vers le catalogue pour réaliser les achats#}
+            {% else %}
+            {% for achat in achats %}
+            <li>{{ achat.codeAchat }}</li>
+            <li>{{ achat.codeEnregistrement }}</li>
+            {% endfor %}
+                {% endif %}
     {% else %}
         <p>Veuillez vous identifier afin d'accéder à votre panier. </p>
     {% endif %}

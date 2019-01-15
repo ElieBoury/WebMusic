@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Pays;
 use App\Entity\Abonne;
+use App\Repository\AbonneRepository;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\Form\Forms;
 use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,14 +23,24 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/panier", name="user_panier")
+     *  @Route("/panier", name="user_panier")
+     *  @Route("/{codeAbonne}/panier" ,name="user_panier1")
      */
-    public function panier()
-    {
+    public function panier(Abonne $abonne=Null,AbonneRepository $abonneRepo)
+{
+    if (!$abonne) {
         return $this->render('user/panier.html.twig', [
             'controller_name' => 'UserController',
+
+        ]);
+    } else {
+        $achats = $abonneRepo->achatsNonConfirmes($abonne);
+        return $this->render('user/panier.html.twig', [
+
+            'achats' => $achats,'controller_name' => 'UserController',
         ]);
     }
+}
 
     //TODO Afficher pays
     //TODO Modify
@@ -169,7 +181,16 @@ class UserController extends AbstractController
     /**
      * @Route("/logout", name="user_logout")
      */
+<<<<<<< HEAD
     public function logout()
     {
     }
+=======
+    public function logout() {
+        return $this->render('home/home.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+>>>>>>> c9f89bd27d66fdfdff5a3205d9f4c31cae6b85ba
 }

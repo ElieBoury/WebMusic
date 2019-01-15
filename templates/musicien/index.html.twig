@@ -29,15 +29,15 @@
         <tbody>
         {% for musicien in musiciens %}
             <tr>
-                <td>{{ musicien.Code_Musicien }}</td>
-                <td>{{ musicien.Nom_Musicien }}</td>
-                <td>{{ musicien.Prenom_Musicien }}</td>
-                <td>{{ musicien.Annee_Naissance }}</td>
-                <td>{{ musicien.Annee_Mort }}</td>
-                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.Code_Musicien}) }}"
+                <td>{{ musicien.codeMusicien }}</td>
+                <td>{{ musicien.nomMusicien }}</td>
+                <td>{{ musicien.prenomMusicien }}</td>
+                <td>{{ musicien.anneeNaissance }}</td>
+                <td>{{ musicien.anneeMort }}</td>
+                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"
                          alt="Pas d'image"/></td>
                 <td>
-                    <a href="{{ path('musicien_show', {'codeMusicien': musicien.Code_Musicien}) }}">show</a>
+                    <a href="{{ path('musicien_show', {'codeMusicien': musicien.codeMusicien}) }}">show</a>
                 </td>
             </tr>
         {% else %}
