@@ -13,8 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="Abonne", indexes={@ORM\Index(name="IDX_719E8EC620B77BF2", columns={"Code_Pays"})})
  * @ORM\Entity
  * @UniqueEntity(
- *  fields={"email", "login"},
- *  message="Email ou identifiant déjà existant."
+ *  fields={"email"},
+ *  message="Email déjà existant."
  * )
  */
 class Abonne implements UserInterface
@@ -31,7 +31,7 @@ class Abonne implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="Nom_Abonne", type="string", length=50, nullable=false)
+     * @ORM\Column(name="Nom_Abonne", type="string", length=100, nullable=false)
      * @Assert\Length(max="50", maxMessage="Votre nom doit comporter moins de 50 caractères.")
      */
     private $nomAbonne;
@@ -39,7 +39,7 @@ class Abonne implements UserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Login", type="string", length=50, nullable=true)
+     * @ORM\Column(name="Login", type="string", length=50, nullable=false)
      * @Assert\Length(max="50", maxMessage="Votre identifiant doit comporter moins de 50 caractères.")
      */
     private $login;
@@ -47,7 +47,7 @@ class Abonne implements UserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Password", type="string", length=30, nullable=true)
+     * @ORM\Column(name="Password", type="string", length=30, nullable=false)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit comporter 8 caractères au minimum.",
      *                 max="30", maxMessage="Votre mot de passe doit comporter moins de 30 caractères.")
      */
@@ -55,7 +55,7 @@ class Abonne implements UserInterface
 
     /**
      * @var string|null
-     *
+     * 
      * @Assert\EqualTo(propertyPath="password", message="Veuillez insérer des mots de passe identiques.")
      */
     private $confirm_password;
@@ -64,7 +64,7 @@ class Abonne implements UserInterface
      * @var string|
      *
      * @ORM\Column(name="Adresse", type="string", length=200, nullable=true)
-     * @Assert\Length(min="0", max="200", maxMessage="Votre adresse doit comporter moins de 200 caractères.")
+     * @Assert\Length(max="200", maxMessage="Votre adresse doit comporter moins de 200 caractères.")
      */
     private $adresse;
 
@@ -72,22 +72,22 @@ class Abonne implements UserInterface
      * @var string|null
      *
      * @ORM\Column(name="Ville", type="string", length=100, nullable=true)
-     * @Assert\Length(min="0", max="200", maxMessage="Votre ville doit comporter moins de 100 caractères.")
+     * @Assert\Length(max="200", maxMessage="Votre ville doit comporter moins de 100 caractères.")
      */
     private $ville;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Code_Postal", type="string", length=5, nullable=true)
-     * @Assert\Length(min="0", max="5", maxMessage="Le code postal doit comporter 5 caractères.")
+     * @ORM\Column(name="Code_Postal", type="string", length=50, nullable=true)
+     * @Assert\Length(min="5", max="5", maxMessage="Le code postal doit comporter 5 caractères.")
      */
     private $codePostal;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Email", type="string", length=50, nullable=true)
+     * @ORM\Column(name="Email", type="string", length=100, nullable=false)
      * @Assert\Email()
      */
     private $email;
@@ -110,7 +110,7 @@ class Abonne implements UserInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(name="Prenom_Abonne", type="string", length=50, nullable=true)
+     * @ORM\Column(name="Prenom_Abonne", type="string", length=100, nullable=false)
      * @Assert\Length(max="50", maxMessage="Votre prénom doit comporter moins de 50 caractères.")
      */
     private $prenomAbonne;
@@ -122,7 +122,6 @@ class Abonne implements UserInterface
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="Code_Pays", referencedColumnName="Code_Pays")
      * })
-     * @Assert\Length(min="0", max="100", maxMessage="Votre pays doit comporter moins de 100 caractères.")
      */
     private $codePays;
 

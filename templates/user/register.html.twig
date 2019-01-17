@@ -18,24 +18,17 @@
         <h1>Modifier mes informations</h1>
     {% endif %}
 
-    {{ form_row(formRegister.nomAbonne) }}
-    {{ form_row(formRegister.prenomAbonne) }}
-    {{ form_row(formRegister.email) }}
-    {{ form_row(formRegister.login) }}
-    {{ form_row(formRegister.adresse) }}
-    {{ form_row(formRegister.codePostal) }}
-    {{ form_row(formRegister.ville) }}
-    {{ form_row(formRegister.codePays) }}
-
+    {{form_start(formRegister)}}
+    {{form_widget(formRegister)}}
     {% if not app.user %}
-        {{ form_row(formRegister.password) }}
-        {{ form_row(formRegister.confirm_password) }}
+        
         <button type="submit" class="btn btn-success"> S'inscrire </button>
     {% else %}
         <button type="submit" class="btn btn-success"> Modifier mes informations </button>
     {% endif %}
     <p>*Champs obligatoires</p>
 
+    {{form_end(formRegister)}}
 </div>
 
 {% endblock %}

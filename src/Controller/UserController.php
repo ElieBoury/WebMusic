@@ -43,8 +43,6 @@ class UserController extends AbstractController
     }
 }
 
-    //TODO Afficher pays
-    //TODO Modify
     /**
      * @Route("/enregistrer", name="user_register")
      * @Route("/{codeAbonne}/modify", name="user_modify")
@@ -142,12 +140,13 @@ class UserController extends AbstractController
             $manager->persist($abonne);
             $manager->flush();
 
-            return $this->redirectToRoute('user_login');
+            return $this->redirectToRoute('user_login'); 
         }
 
         return $this->render('user\register.html.twig', [
             'formRegister' => $form->createView()
         ]);
+        
     }
 
 
