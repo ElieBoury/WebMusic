@@ -6,10 +6,10 @@
 
 {% block body %}
     <h1>Musicien index</h1>
-    <form method="post" action="{{ path('musicien_indexF') }}">
+    <form method="post" action="{{ path('musicien_index') }}">
 
         <input required type="text" name="filtre" placeholder="Filtre par nom" >
-
+        <input type="hidden" name="numPage" value="1">
         <input type="submit" value="Filtrer" />
 
     </form>
@@ -57,13 +57,32 @@
              {% else %}
                 <li class="page-item active">
               {% endif %}
-                <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  numPage-1}) }}">&laquo;</a>
+                <form method="post" action="{{ path('musicien_index') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="{{ numPage -1}}">
+                    <input type="submit" value="&laquo;" />
+
+                </form>
+              {#  <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  numPage-1}) }}">&laquo;</a>#}
             </li>
             <li class="page-item active">
-                <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  1}) }}"> 1</a>
+                <form method="post" action="{{ path('musicien_index') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="1">
+                    <input type="submit" value="1" />
+
+                </form>
             </li>
             <li class="page-item active">
-                <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' : numPage+1}) }}">&raquo;</a>
+                <form method="post" action="{{ path('musicien_index') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="{{ numPage +1}}">
+                    <input type="submit"  value="&raquo;"/>
+
+                </form>
             </li>
         </ul>
     </div>

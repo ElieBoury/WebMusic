@@ -39,15 +39,16 @@ class MusicienRepository extends ServiceEntityRepository
         $query->execute();
         return $query->getResult();
     }
-    public function selectFilter($filtre){
+    public function selectFilter($filtre,$off){
         $em = $this->getEntityManager();
        //OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
       //  $stmt = $em->getConnection()->query("Select * from Musicien where Nom_Musicien like 'nom'  ");/* FETCH 10 NEXT ROWS ONLY*/
         $rsn = new ResultSetMappingBuilder($em);
         $rsn->addRootEntityFromClassMetadata(Musicien::class,'Musicien');
-        $sql = "Select * from Musicien where Nom_Musicien like :filtre ";
+        $sql = "Select * from Musicien where Nom_Musicien like :filtre ORDER BY Code_Musicien OFFSET :off ROWS FETCH NEXT 20 ROWS ONLY";
         $query=$em->createNativeQuery($sql,$rsn);
         $query->setParameter(':filtre',$filtre.'%');
+        $query->setParameter(':off',$off);
         $query->execute();
         return $query->getResult();
     }

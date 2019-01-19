@@ -20,21 +20,23 @@ use App\Repository\MusicienRepository;
 class MusicienController extends AbstractController
 {//#{numeroPage}
     /**
-     * @Route("/", name="musicien_index", methods="GET")
-     * @Route("/page/{numeroPage}", name="musicien_index_pages",methods="GET")
+     * @Route("/", name="musicien_index")
      */
     public function index($numeroPage=null,MusicienRepository $musicienRepo): Response
-    {
+            {
+            $numeroPage = isset($_POST['numPage'])? $_POST['numPage'] : 1;
+            $filtre = isset($_POST['filtre'])? $_POST['filtre'] : "";
             $off = 0;
             if ($numeroPage != 1){
-                $off = $numeroPage*10;
+                $off = ($numeroPage-1)*20;
             }
-            $musiciens = $this->getDoctrine()->getRepository(Musicien::class)
-                ->findBy([],null,20, $off);
+//            $musiciens = $this->getDoctrine()->getRepository(Musicien::class)
+//                ->findBy([],null,20, $off);
+            $musiciens = $musicienRepo->selectFilter($filtre,$off);
         $nombre = $musicienRepo->selectAllCount();
         //$nombre=$nombres/10;
         return $this->render('musicien/index.html.twig', [
-            'musiciens' => $musiciens, 'nombres'=>$nombre,'numPage'=> $numeroPage]);
+            'musiciens' => $musiciens, 'nombres'=>$nombre,'numPage'=> $numeroPage,'filtre'=>$filtre]);
     }
     /**
      * @Route("/#", name="musicien_indexF")
