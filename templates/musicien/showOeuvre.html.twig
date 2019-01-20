@@ -30,14 +30,37 @@
             <td>{{ oeuvre.opus }}</td>
         </tr>
         <tr>
-            <tr>
-            <th>Albums</th>
-            {% for album in albums %}
-            <td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
-            alt="Pas d'image"/></td>
+            <th>Enregistrements</th>
+            {% for enregistrement in enreg %}
+            <td>{{ enregistrement.Titre }}</td>
+                {% if enregistrement.Extrait != null %}
+                    <td><audio
+                                controls="controls">
+                            <source
+                                    src="{{ path('musicien_enregistrement_audio',{'codeMorceau' : enregistrement.Code_Morceau})}}"
+                                    type="audio/mp3"/>
+                            Your browser does not support the
+                            <code>audio</code> element.
+                        </audio></td><br>
+                    {#<td>#}
+                        {#<audio controls="controls">#}
+                            {#<source src="data:audio/mpeg;base64,{{ enregistrement.getExtrait}}"#}
+                                    {#type="audio/mp3"/>#}
+                            {#Votre navigateur n'est pas compatible#}
+                        {#</audio>#}
+                    {#</td>#}
+                {% endif %}
+
             {% endfor %}
-            </tr>
-            {#<th>Photo</th>#}
+        </tr>
+        {#<th>Photo</th>#}
+        <tr>
+        <th>Albums</th>
+        {% for album in albums %}
+        <td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
+        alt="Pas d'image"/></td>
+        {% endfor %}
+        </tr>
             {#<td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"#}
                      {#alt="Pas d'image"/></td>#}
         {#</tr>#}

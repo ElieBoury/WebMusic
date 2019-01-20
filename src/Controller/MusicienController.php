@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Musicien;
 use App\Entity\Oeuvre;
 use App\Entity\Album;
+use App\Entity\Enregistrement;
 use App\Form\MusicienType;
 use App\Repository\OeuvresRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,13 +58,19 @@ class MusicienController extends AbstractController
     }
 
     /**
-     * @Route("/{codeMusicien}", name="musicien_show", methods="GET")
+     * @Route("/{codeMusicien}", name="musicien_show")
      */
-    public function show(Musicien $musicien, MusicienRepository $musicienRepo): Response
+    public function show(Musicien $musicien, MusicienRepository $musicienRepo,OeuvresRepository $oeuvresRepo): Response
     {
+        $filtre = isset($_POST['filtre'])? $_POST['filtre'] : "";
+        $numPage = isset($_POST['numPage'])? $_POST['numPage']:1;
+        $oeuvres = $musicienRepo->selectOeuvres($musicien);
+        $albums = array();
+        foreach($oeuvres as $oeu=>$oeuvre) {
 
-
-        return $this->render('musicien/show.html.twig', ['musicien' => $musicien]);
+            $albums[$oeu] = $oeuvresRepo->selectAlbumsEnregistrements($oeuvre);
+        }
+        return $this->render('musicien/show.html.twig', ['musicien' => $musicien, 'filtre'=>$filtre,'numPage'=>$numPage,'albums'=>$albums]);
     }
 
     /**
@@ -93,8 +100,14 @@ class MusicienController extends AbstractController
      * @Route("/{codeMusicien}/oeuvres/{codeOeuvre}", name="musicien_oeuvres_show", methods="GET")
      */
     public function showOeuvres(Musicien $musicien,Oeuvre $oeuvre, OeuvresRepository $oeuvresRepo){
-        $albums=$oeuvresRepo->selectAlbums($oeuvre);
-        return $this->render('musicien/showOeuvre.html.twig', ['oeuvre'=> $oeuvre, 'albums'=>$albums]);
+    //    $albums=$oeuvresRepo->selectAlbums($oeuvre);
+      //  $enregistrements =$oeuvresRepo->selectEnregistrements($oeuvre);
+        $enregistrements = $oeuvresRepo->selectEnregistrements($oeuvre);
+//        foreach($enregistrements as $enregistrement){
+//            $albums = $oeuvresRepo->selectAlbumsEnreg($enregistrement);
+//        }
+        $albums = $oeuvresRepo->selectAlbumsEnregistrements($oeuvre);
+        return $this->render('musicien/showOeuvre.html.twig', ['oeuvre'=> $oeuvre, 'albums'=>$albums, 'enreg'=>$enregistrements]);
     }
     /**
      * @Route("/{codeAlbum}/images", name="musicien_image_album",methods="GET")
@@ -109,9 +122,21 @@ class MusicienController extends AbstractController
         $response->setContent($image);
         return $response;
     }
-//    public function filtreMusicien($musicien){
-//        $em = $this->getDoctrine()->getManager();
-//        $data=$em->getRepository(Musicien :: class)->findAll();
-//        $sql = $em->
-//    }
+    /**
+     * @Route("/{codeMorceau}/enregistrement", name="musicien_enregistrement_audio", methods="GET")
+     */
+    public function enregistrementAudio(Enregistrement $enregistrement) : Response{
+        $response = new Response();
+        $response->headers->set("Content-Type","audio/mp3");
+        $audio = null;
+        if ($enregistrement->getExtrait()!=null){
+            $audio = (stream_get_contents($enregistrement->getExtrait()));
+        }
+        $response->setContent($audio);
+        return $response;
+
+    }
+
+
+
 }

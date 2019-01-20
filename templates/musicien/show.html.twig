@@ -6,7 +6,13 @@
 {% block stylesheets %}<link rel="stylesheets" type="text/css" href="/css/style.css">{% endblock %}
 {% block body %}
     <h1>Musicien</h1>
-    <a href="{{ path('musicien_index') }}">back to list</a>
+    <form method="post" action="{{ path('musicien_index') }}">
+
+        <input type="hidden" name="filtre" value="{{ filtre }}" >
+        <input type="hidden" name="numPage" value="{{ numPage }}">
+        <input type="submit" value="Back to list" />
+
+    </form>
     <table class="table">
         <tbody>
             <tr>
@@ -38,13 +44,13 @@
                 <th>Oeuvres</th>
                 <td><a href="{{ path('musicien_oeuvres',{'codeMusicien' : musicien.codeMusicien}) }}">Voir la liste des oeuvres</a></td>
             </tr>
-            {#<tr>#}
-                {#<th>Albums</th>#}
-                {#{% for album in albums %}#}
-                {#<td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"#}
-                         {#alt="Pas d'image"/></td>#}
-                {#{% endfor %}#}
-            {#</tr>#}
+            <tr>
+                <th>Albums</th>
+                {% for album in albums %}
+                <td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
+                         alt="Pas d'image"/></td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
     

@@ -23,7 +23,6 @@
                 <th>AnneeNaissance</th>
                 <th>AnneeMort</th>
                 <th>Photo</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
@@ -34,11 +33,15 @@
                 <td>{{ musicien.prenomMusicien }}</td>
                 <td>{{ musicien.anneeNaissance }}</td>
                 <td>{{ musicien.anneeMort }}</td>
-                <td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"
-                         alt="Pas d'image"/></td>
                 <td>
-                    <a href="{{ path('musicien_show', {'codeMusicien': musicien.codeMusicien}) }}">show</a>
-                </td>
+                    <form method="post" action="{{ path('musicien_show',{'codeMusicien' : musicien.codeMusicien })}}">
+
+                        <input type="hidden" name="filtre" value="{{ filtre }}" >
+                        <input type="hidden" name="numPage" value="{{ numPage }}">
+                        <input type="image" src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"
+                               alt="Pas d'image" />
+                    </form></td>
+
             </tr>
         {% else %}
             <tr>

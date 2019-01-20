@@ -158,6 +158,4 @@ class Enregistrement
 
         return $this;
     }
-
-
 }

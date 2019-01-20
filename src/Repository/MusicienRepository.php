@@ -59,7 +59,7 @@ class MusicienRepository extends ServiceEntityRepository
         $sql =         "Select * From Oeuvre
               inner join Composer ON Oeuvre.Code_Oeuvre = Composer.Code_Oeuvre
               Where Code_Musicien = $codeM";
-        $stmt = $em->getConnection()->prepare($sql)/*->(':musicien',$musicien->getCodeMusicien())*/;
+        $stmt = $em->getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
 
