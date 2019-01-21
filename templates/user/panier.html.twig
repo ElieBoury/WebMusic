@@ -16,12 +16,8 @@
             <a href="{{ path('enregistrement') }}">Aller dans le catalogue</a>
             {% else %}
                 {% for achat in achats %}
-                <li>{{ path('achat_enregistrement',{'codeAchat':achat.codeAchat}) }}</li>
+                <li>{{ path('achat_enregistrement',{'codeAchat':achat.codeAchat}) }} {{ achat.codeAchat }}</li>
                 {% endfor %}
-                {% for enregistrement in enregistrements %}
-            <li>{{ enregistrement.codeMorceau }} {{ enregistrement.titre }}    :   {{ enregistrement.prix }}€</li>
-          {#  <li>{{ achat.codeEnregistrement }}</li>#}
-            {% endfor %}
                 {% endif %}
         {% if not history %}
 
