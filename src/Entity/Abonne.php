@@ -293,5 +293,8 @@ class Abonne implements UserInterface
     {
         
     }
+public function getCode(){
+        return $this->getCodeAbonne();
+}
 
 }

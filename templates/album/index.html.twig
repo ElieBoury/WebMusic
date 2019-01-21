@@ -1,20 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AlbumController!{% endblock %}
+{% block title %}Album index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Album index</h1>
+    <form method="post" action="{{ path('album_index') }}">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <input required type="text" name="filtre" placeholder="Filtre par nom" >
+        <input type="hidden" name="numPage" value="1">
+        <input type="submit" value="Filtrer" />
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/tlavergne/webmusic/src/Controller/AlbumController.php'|file_link(0) }}">src/Controller/AlbumController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/tlavergne/webmusic/templates/album/index.html.twig'|file_link(0) }}">templates/album/index.html.twig</a></code></li>
-    </ul>
-</div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>CodeAlbum</th>
+                <th>TitreAlbum</th>
+                <th>AnneeAlbum</th>
+                <th>Pochette</th>
+                <th>Asin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for album in albums %}
+            <tr>
+                <td>{{ album.codeAlbum }}</td>
+                <td>{{ album.titreAlbum }}</td>
+                <td>{{ album.anneeAlbum }}</td>
+                <td><img src= "{{ path('album_image', {'codeAlbum' : album.codeAlbum}) }}"
+                         alt="Pas d'image"/></td>
+                <td>{{ album.asin }}</td>
+                <td>
+                    <a href="{{ path('album_show', {'codeAlbum': album.codeAlbum}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="centre">
+        <ul class="pagination pagination-sm">
+            {% if numPage==1 %}
+            <li class="page-item disabled">
+                {% else %}
+            <li class="page-item active">
+                {% endif %}
+                <form method="post" action="{{ path('album_index') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="{{ numPage -1}}">
+                    <input type="submit" value="&laquo;" />
+
+                </form>
+                {#  <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  numPage-1}) }}">&laquo;</a>#}
+            </li>
+            <li class="page-item active">
+                <form method="post" action="{{ path('album_index') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="1">
+                    <input type="submit" value="1" />
+
+                </form>
+            </li>
+            <li class="page-item active">
+                <form method="post" action="{{ path('album_index') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="{{ numPage +1}}">
+                    <input type="submit"  value="&raquo;"/>
+
+                </form>
+            </li>
+        </ul>
+    </div>
+
+
 {% endblock %}

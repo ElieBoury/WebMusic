@@ -1,20 +1,131 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EnregistrementController!{% endblock %}
+{% block activeEnregistrements %} active {% endblock %}
+
+{% block title %}Enregistrement index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Enregistrements index</h1>
+    <form method="post" action="{{ path('enregistrement') }}">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <input required type="text" name="filtre" placeholder="Filtre par nom" >
+        <input type="hidden" name="numPage" value="1">
+        <input type="submit" value="Filtrer" />
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/tlavergne/webmusic/src/Controller/EnregistrementController.php'|file_link(0) }}">src/Controller/EnregistrementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/tlavergne/webmusic/templates/enregistrement/index.html.twig'|file_link(0) }}">templates/enregistrement/index.html.twig</a></code></li>
-    </ul>
-</div>
+    </form>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>CodeMorceau</th>
+            <th>Titre</th>
+            <th>Nom de fichier</th>
+            <th>Durée</th>
+            <th>Durée Seconde</th>
+            <th>Prix</th>
+            <th>Extrait</th>
+            <th>Achat</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for enregistrement in enregistrements %}
+            <tr>
+                <td>{{ enregistrement.codeMorceau }}</td>
+                <td> <form  method="post" action="{{ path('enregistrement_show',{'codeMorceau':enregistrement.codeMorceau}) }}">
+
+                        <input type="hidden" name="filtre" value="{{ filtre }}" >
+                        <input type="hidden" name="numPage" value="{{ numPage }}">
+                        <input class="btn btn-link" type="submit" value="{{ enregistrement.Titre }}" />
+
+                    </form></td>
+                <td>{{ enregistrement.nomDeFichier }}</td>
+                <td>{{ enregistrement.duree }}</td>
+                <td>{{ enregistrement.dureeSeconde }}</td>
+                <td>{{ enregistrement.prix }}</td>
+                <td><audio
+                            controls="controls">
+                        <source
+                                src="{{ path('enregistrement_audio',{'codeMorceau' : enregistrement.codeMorceau})}}"
+                                type="audio/mp3"/>
+                        Your browser does not support the
+                        <code>audio</code> element.
+                    </audio></td>
+                <td>
+                    {% if app.user %}
+                    <form method="post" action="{{ path('user_panier1',{'codeAbonne' : app.user.codeAbonne})}}">
+
+                        <input type="hidden" name="filtre" value="{{ filtre }}" >
+                        <input type="hidden" name="numPage" value="{{ numPage }}">
+                        <input type="hidden" name="enregistrement" value="{{ enregistrement.codeMorceau }}">
+                        <input class="btn btn-link" type="submit" value="Ajouter au panier" />
+    </form>
+
+        {% else %}
+            <form method="post" action="{{ path('user_panier')}}">
+
+                <input type="hidden" name="filtre" value="{{ filtre }}" >
+                <input type="hidden" name="numPage" value="{{ numPage }}">
+                <input class="btn btn-link" type="submit" value="Ajouter au panier" />
+            </form>
+{% endif %}
+                </td>
+                {#<td>#}
+                    {#<form method="post" action="{{ path('musicien_show',{'codeMusicien' : musicien.codeMusicien })}}">#}
+
+                        {#<input type="hidden" name="filtre" value="{{ filtre }}" >#}
+                        {#<input type="hidden" name="numPage" value="{{ numPage }}">#}
+                        {#<input type="image" src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"#}
+                               {#alt="Pas d'image" />#}
+                    {#</form></td>#}
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {#{% for nombre in nombres%}#}
+
+    <div class="centre">
+        <ul class="pagination pagination-sm">
+            {% if numPage==1 %}
+            <li class="page-item disabled">
+                {% else %}
+            <li class="page-item active">
+                {% endif %}
+                <form method="post" action="{{ path('enregistrement') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="{{ numPage -1}}">
+                    <input type="submit" value="&laquo;" />
+
+                </form>
+                {#  <a class="page-link" href="{{ path('musicien_index_pages',{'numeroPage' :  numPage-1}) }}">&laquo;</a>#}
+            </li>
+            <li class="page-item active">
+                <form method="post" action="{{ path('enregistrement') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="1">
+                    <input type="submit" value="1" />
+
+                </form>
+            </li>
+            <li class="page-item active">
+                <form method="post" action="{{ path('enregistrement') }}">
+
+                    <input type="hidden" name="filtre" value="{{ filtre }}" >
+                    <input type="hidden" name="numPage" value="{{ numPage +1}}">
+                    <input type="submit"  value="&raquo;"/>
+
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    {#{% endfor %}#}
+
 {% endblock %}

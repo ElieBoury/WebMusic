@@ -11,16 +11,29 @@
 <div class="example-wrapper">
     {% if app.user %}
         <h1>Mon panier</h1>
-        {% if   not achats %}
+        {% if  achats is null %}
             <h3>Vous n'avez pas encore d'achats</h3>
-            {#Ajouter un lien vers le catalogue pour réaliser les achats#}
+            <a href="{{ path('enregistrement') }}">Aller dans le catalogue</a>
             {% else %}
-            {% for achat in achats %}
-            <li>{{ achat.codeAchat }}</li>
-            <li>{{ achat.codeEnregistrement }}</li>
+                {% for achat in achats %}
+                <li>{{ path('achat_enregistrement',{'codeAchat':achat.codeAchat}) }}</li>
+                {% endfor %}
+                {% for enregistrement in enregistrements %}
+            <li>{{ enregistrement.codeMorceau }} {{ enregistrement.titre }}    :   {{ enregistrement.prix }}€</li>
+          {#  <li>{{ achat.codeEnregistrement }}</li>#}
             {% endfor %}
                 {% endif %}
-    {% else %}
+        {% if not history %}
+
+            <a href="{{ path('confirmation_achats',{'codeAbonne':app.user.codeAbonne}) }}">Confirmer les achats</a>
+            <br>
+            <a href="{{ path('delete_achats',{'codeAbonne':app.user.codeAbonne}) }}">Vider le panier</a>
+            <br>
+            <a href="{{ path('historique_achats',{'codeAbonne' :app.user.codeAbonne}) }}">Historique des achats</a>
+        {% else %}
+            <a href="{{ path('user_panier1',{'codeAbonne':app.user.codeAbonne}) }}">Retour au panier</a>
+            {% endif %}
+        {% else %}
         <p>Veuillez vous identifier afin d'accéder à votre panier. </p>
     {% endif %}
 </div>

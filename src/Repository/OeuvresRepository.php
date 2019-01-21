@@ -14,7 +14,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\ORM\EntityRepository;
-
+use App\Entity\Album;
+use App\Entity\Abonne;
 class OeuvresRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -22,22 +23,28 @@ class OeuvresRepository extends ServiceEntityRepository
         parent::__construct($registry, Oeuvre::class);
     }
 
-    public function selectAlbums(Oeuvre $oeuvre)
-    {
+    public function selectAlbums($filtre,$off){
         $em = $this->getEntityManager();
-        $codeO = $oeuvre->getCodeOeuvre();
-        $sql = "Select * from Album
-inner join Disque on Disque.Code_Album = Album.Code_Album
-inner join Composition_Disque on Composition_Disque.Code_Disque = Disque.Code_Disque
-inner join Interpreter on Composition_Disque.Code_Morceau = Interpreter.Code_Morceau
-inner join Instrumentation on Interpreter.Code_Instrument = Instrumentation.Code_Instrument
-inner join Composer on Instrumentation.Code_Oeuvre = Composer.Code_Oeuvre
-where Composer.Code_Musicien = $codeO";
-        $stmt = $em->getConnection()->prepare($sql);;
-        $stmt->execute();
-        return $stmt->fetchAll();
+        //OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
+        //  $stmt = $em->getConnection()->query("Select * from Musicien where Nom_Musicien like 'nom'  ");/* FETCH 10 NEXT ROWS ONLY*/
+        $rsn = new ResultSetMappingBuilder($em);
+        $rsn->addRootEntityFromClassMetadata(Album::class,'Album');
+        $sql = "Select * from Album where Titre_Album like :filtre ORDER BY Code_Album OFFSET :off ROWS FETCH NEXT 10 ROWS ONLY";
+        $query=$em->createNativeQuery($sql,$rsn);
+        $query->setParameter(':filtre',$filtre.'%');
+        $query->setParameter(':off',$off);
+        $query->execute();
+        return $query->getResult();
     }
-
+//    public function AjoutPanier(Abonne $abonne,Enregistrement $enregistrement){
+//        $em = $this->getEntityManager();
+//        $codeA = $abonne->getCodeAbonne();
+//        $codeE = $enregistrement->getCodeMorceau();
+//        $sql = "INSERT into Achat values ($codeE,$codeA,0)";
+//        $stmt=$em->getConnection()->prepare($sql);
+//        $stmt->
+//
+//    }
     public function selectEnregistrements(Oeuvre $oeuvre)
     {
         $em = $this->getEntityManager();
@@ -52,14 +59,20 @@ where Composition_Oeuvre.Code_Oeuvre = $codeO";
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    public function selectAllEnreg(){
-        $em= $this->getEntityManager();
-        $sql="Select * from Enregistrement";
-        $stmt=$em->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
 
+    public function selectEnreg($filtre,$off){
+        $em = $this->getEntityManager();
+        //OFFSET 5 ROWS FETCH NEXT 10 ROWS ONLY
+        //  $stmt = $em->getConnection()->query("Select * from Musicien where Nom_Musicien like 'nom'  ");/* FETCH 10 NEXT ROWS ONLY*/
+        $rsn = new ResultSetMappingBuilder($em);
+        $rsn->addRootEntityFromClassMetadata(Enregistrement::class,'Enregistrement');
+        $sql = "Select * from Enregistrement where Titre like :filtre ORDER BY Code_Morceau OFFSET :off ROWS FETCH NEXT 10 ROWS ONLY";
+        $query=$em->createNativeQuery($sql,$rsn);
+        $query->setParameter(':filtre',$filtre.'%');
+        $query->setParameter(':off',$off);
+        $query->execute();
+        return $query->getResult();
+    }
     public function selectAlbumsEnreg(Enregistrement $enregistrement)
     {
         $em = $this->getEntityManager();

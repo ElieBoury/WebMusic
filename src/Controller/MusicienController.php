@@ -39,16 +39,16 @@ class MusicienController extends AbstractController
         return $this->render('musicien/index.html.twig', [
             'musiciens' => $musiciens, 'nombres'=>$nombre,'numPage'=> $numeroPage,'filtre'=>$filtre]);
     }
-    /**
-     * @Route("/#", name="musicien_indexF")
-     */
-    public function indexFilter(Request $request, MusicienRepository $musicienRepo): Response{
-        //$filtre = $request->get($_POST)['filtre'];
-            $filtre = $_POST['filtre'];
-        $musiciens= $musicienRepo->selectFilter($filtre);
-        $nbMusiciensF = $musicienRepo->selectAllCountFilter($filtre);
-        return $this->render('musicien/index.html.twig', ['musiciens'=>$musiciens, 'numPage'=>$nbMusiciensF]);
-    }
+//    /**
+//     * @Route("/#", name="musicien_indexF")
+//     */
+//    public function indexFilter(Request $request, MusicienRepository $musicienRepo): Response{
+//        //$filtre = $request->get($_POST)['filtre'];
+//            $filtre = $_POST['filtre'];
+//        $musiciens= $musicienRepo->selectFilter($filtre);
+//        $nbMusiciensF = $musicienRepo->selectAllCountFilter($filtre);
+//        return $this->render('musicien/index.html.twig', ['musiciens'=>$musiciens, 'numPage'=>$nbMusiciensF]);
+//    }
     /**
      * @Route("/oeuvres", name="oeuvres", methods="GET")
      */
@@ -65,12 +65,12 @@ class MusicienController extends AbstractController
         $filtre = isset($_POST['filtre'])? $_POST['filtre'] : "";
         $numPage = isset($_POST['numPage'])? $_POST['numPage']:1;
         $oeuvres = $musicienRepo->selectOeuvres($musicien);
-        $albums = array();
-        foreach($oeuvres as $oeu=>$oeuvre) {
-
-            $albums[$oeu] = $oeuvresRepo->selectAlbumsEnregistrements($oeuvre);
-        }
-        return $this->render('musicien/show.html.twig', ['musicien' => $musicien, 'filtre'=>$filtre,'numPage'=>$numPage,'albums'=>$albums]);
+//        $albums = array();
+//        foreach($oeuvres as $oeu=>$oeuvre) {
+//
+//            $albums[$oeu] = $oeuvresRepo->selectAlbumsEnregistrements($oeuvre);
+//        }
+        return $this->render('musicien/show.html.twig', ['musicien' => $musicien, 'filtre'=>$filtre,'numPage'=>$numPage/*,'albums'=>$albums*/]);
     }
 
     /**
@@ -136,7 +136,5 @@ class MusicienController extends AbstractController
         return $response;
 
     }
-
-
 
 }

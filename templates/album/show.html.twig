@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album{% endblock %}
+
+{% block body %}
+    <h1>Album</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>CodeAlbum</th>
+                <td>{{ album.codeAlbum }}</td>
+            </tr>
+            <tr>
+                <th>TitreAlbum</th>
+                <td>{{ album.titreAlbum }}</td>
+            </tr>
+            <tr>
+                <th>AnneeAlbum</th>
+                <td>{{ album.anneeAlbum }}</td>
+            </tr>
+            <tr>
+                <th>Pochette</th>
+                <td><img src="{{ path('album_image',{'codeAlbum' : album.codeAlbum}) }}" alt="Pas d'image"></td>
+            </tr>
+            <tr>
+                <th>Asin</th>
+                <td>{{ album.asin }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('album_index') }}">back to list</a>
+
+
+{% endblock %}

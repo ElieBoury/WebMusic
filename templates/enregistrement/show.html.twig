@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block activeEnregistrements %} active {% endblock %}
+
+{% block title %}Enregistrement{% endblock %}
+{% block stylesheets %}<link rel="stylesheets" type="text/css" href="/css/style.css">{% endblock %}
+{% block body %}
+    <h1>Enregistrement</h1>
+    <form method="post" action="{{ path('enregistrement') }}">
+
+        <input type="hidden" name="filtre" value="{{ filtre }}" >
+        <input type="hidden" name="numPage" value="{{ numPage }}">
+        <input type="submit" value="Back to list" />
+
+    </form>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>CodeMorceau</th>
+            <td>{{ enregistrement.codeMorceau }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ enregistrement.Titre }}</td>
+        </tr>
+        <tr>
+            <th>Nom de fichier</th>
+            <td>{{ enregistrement.nomDeFichier }}</td>
+        </tr>
+        <tr>
+            <th>Durée</th>
+            <td>{{ enregistrement.duree }}</td>
+        </tr>
+        <tr>
+            <th>Durée Seconde</th>
+            <td>{{ enregistrement.dureeSeconde}}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ enregistrement.prix }}</td>
+        </tr>
+        <tr>
+            <th>Extrait</th>
+            <td><audio
+                        controls="controls">
+                    <source
+                            src="{{ path('enregistrement_audio',{'codeMorceau' : enregistrement.codeMorceau})}}"
+                            type="audio/mp3"/>
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio></td>
+        </tr>
+        <tr>
+            <th>Albums</th>
+            {% for album in albums %}
+            <td><img src= "{{ path('enregistrement_image_album', {'codeAlbum' : album.Code_Album}) }}"
+                     alt="Pas d'image"/></td>
+            {% endfor %}
+        </tr>
+        {#<tr>#}
+            {#<th>Oeuvres</th>#}
+            {#<td><a href="{{ path('musicien_oeuvres',{'codeMusicien' : musicien.codeMusicien}) }}">Voir la liste des oeuvres</a></td>#}
+        {#</tr>#}
+        {#<tr>#}
+            {#<th>Albums</th>#}
+            {#{% for album in albums %}#}
+                {#<td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"#}
+                         {#alt="Pas d'image"/></td>#}
+            {#{% endfor %}#}
+        {#</tr>#}
+        </tbody>
+    </table>
+
+{% endblock %}

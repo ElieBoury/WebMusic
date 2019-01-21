@@ -57,8 +57,13 @@
         <tr>
         <th>Albums</th>
         {% for album in albums %}
-        <td><img src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
-        alt="Pas d'image"/></td>
+            <form action="{{ path('album_show',{'codeAlbum' : album.Code_Album })}}">
+
+
+                <input type="image" src= "{{ path('musicien_image_album', {'codeAlbum' : album.Code_Album}) }}"
+                       alt="Pas d'image" />
+            </form>
+
         {% endfor %}
         </tr>
             {#<td><img src= "{{ path('musicien_image', {'codeMusicien' : musicien.codeMusicien}) }}"#}

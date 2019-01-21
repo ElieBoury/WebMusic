@@ -14,11 +14,43 @@
     <h1>A propos</h1>
 
     <p>Décrire travail du groupe</p>
-    <p>By Boury and Lavierge</p>
-    
+    <p>Réalisé par Elie Boury et Thomas Lavergne</p>
+    <h3>Travail réalisé</h3>
+    <p>Voici les tâches que nous avons pu réaliser durant notre projet.<br>
+    Nous avons affiché la liste des musiciens avec une pagination et un filtre pour le nom. Les images des auteurs sont affichées en même temps.
+    Nous avons pu faire de même avec un filtre et une pagination pour les albums et les enregistrements.
+    Pour les albums nous avons affiché leurs pochettes, et pour les enregistrements leurs extraits.
+    Dans tous ces catalogues, nous pouvons accéder à une fiche de renseignements selon le type de données. <br>
+    Pour accéder aux renseignements du musicien, il suffit de cliquer sur l'image liée à celui-ci. Elle permet d'accéder aux seules données de ce musicien,
+        et possède un lien afin de voir la liste des oeuvres du musicien.
+    Parmi ces oeuvres, nous pouvons cliquer sur leur titre pour voir les détails de celle-ci. Ainsi, nous arrivons sur une même page du même type que les détails du musicien.
+    Seulement, sur cette page nous pouvons voir des enregistrements de cette oeuvre, ou encore les albums liés aux enregistrements de cette même oeuvre.
+        Ces enregistrements sont affichés avec un titre et un extrait directement écoutable sur la page.
+        Les albums, eux sont représentés par leur pochette. Nous pouvons cliquer sur celle-ci pour afficher le détail de ce même album.<br>
+        Ensuite, de la même manière que les musiciens, les albums sont triés, la pagination est faite et un filtre est disponible.
+        Contrairement aux musiciens, il faut cette fois, appuyer sur un lien "show" afin d'afficher les détails de l'album (sauf si on passe par un musicien comme décrit précédemment)<br>
+        Puis, pour les enregistrements, la liste est paginée et filtrée, tout comme les deux précédentes. Cette fois, c'est l'extrait qui s'affichera dans l'index.
+        On peut avoir accès aux détails en cliquant sur le titre de l'enregistrement, qui est un lien, ou on peut avoir les détails, l'enregistrement seul, et le(s) album(s) liés à cette oeuvre.
+        <br>
+        En ce qui concerne l'authentification, nous pouvons nous connecter avec n'importe quel Abonné appartenant à la base de données.
+        Nous pouvons créer un utilisateur, avec un mot de passe, adresse email, Nom, prenom, pays, etc. Cet utilisateur sera directement ajouté à la base de données.
+        <br>
+        Pour les achats, nous avons décidé que l'ajout au panier se fera directement dans le catalogue des enregistrements. Il faut être connecté pour pouvoir y accéder.
+
+    </p>
+    <h3>Difficultés rencontrées</h3>
     <ul>
+        <li>En tout premier, comprendre le framwork, ses fonctionnalités et tout son système de fichier</li>
+        <li>Se connecter à la base de données depuis des machines personnelles</li>
+        <li>Comprendre le fonctionnement et l'utilisation des requêtes afin d'afficher les oeuvres ou autre</li>
+        <li>Affichage des albums liés à un musicien </li>
+        <li>Difficulté à afficher les fichiers audio : mauvaise syntaxe venant d'une source incorrecte sur ce projet</li>
+        <li>Tout ce qui concerne la modification du panier : Vider ou confirmer les achats</li>
+        <li>Dans le panier, difficulté à afficher le nom de l'enregistrement lié à un achat particulier (si on le prenait directement dans la liste, <br>
+        il ne prenait pas le nombre exacts d'articles dans le panier</li>
         <li>Camoufler codeAbonne dans l'url de la modif</li>
         <li>Mettre password et modifPassword seulement pour un nouvel abo</li>
+
     </ul>
 </div>
 {% endblock %}
